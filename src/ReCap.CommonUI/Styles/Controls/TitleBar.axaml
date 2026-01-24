@@ -25,7 +25,8 @@
 					<Panel x:Name="PART_Container">
 						<Border x:Name="PART_Background"
 								Background="{TemplateBinding Background}"
-								IsHitTestVisible="False"/>
+								IsHitTestVisible="False"
+								Win32Properties.NonClientHitTestResult="Caption" />
 							<TextBlock x:Name="TitleDisplay"
 									   Text="{Binding $parent[Window].Title}"
 									   IsHitTestVisible="False"
@@ -37,7 +38,8 @@
 													   VerticalAlignment="Top">
 							<CaptionButtons x:Name="PART_CaptionButtons"
 											Foreground="{TemplateBinding Foreground}"
-											Classes.leftSideButtons="{Binding Path=(rctr:WindowChromeAddon.LeftSideButtons), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay}" />
+											Classes.leftSideButtons="{Binding Path=(rctr:WindowChromeAddon.LeftSideButtons), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay}"
+											Win32Properties.NonClientHitTestResult="Client" />
 						</rctr:CaptionButtonsSizeBridge>
 					</Panel>
 				</Panel>

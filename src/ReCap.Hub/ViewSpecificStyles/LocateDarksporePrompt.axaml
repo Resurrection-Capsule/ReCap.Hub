@@ -5,8 +5,7 @@
         xmlns:v="using:ReCap.Hub.Views">
     <Styles.Resources>
         <ControlTheme x:Key="FlashEmphasisBase"
-                    TargetType="{x:Type ContentControl}"
-                    BasedOn="{StaticResource {x:Type ContentControl}}">
+                    TargetType="{x:Type ContentControl}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />

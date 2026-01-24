@@ -21,8 +21,7 @@
 
     
     <ControlTheme x:Key="DialogRoot"
-                TargetType="{x:Type UserControl}"
-                BasedOn="{StaticResource {x:Type ContentControl}}">
+                TargetType="{x:Type UserControl}">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="ClipToBounds" Value="False" />

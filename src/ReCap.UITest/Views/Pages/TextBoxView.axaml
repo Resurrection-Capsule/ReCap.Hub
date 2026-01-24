@@ -1,8 +1,102 @@
 ﻿<UserControl x:Class="ReCap.UITest.Views.Pages.TextBoxView"
             xmlns="https://github.com/avaloniaui"
-			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<StackPanel Orientation="Vertical" Spacing="20">
-		<TextBox Watermark="Type stuff here..." />
-		<TextBox Watermark="Don't type stuff here..." IsEnabled="False" />
-	</StackPanel>
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:rctr="using:ReCap.CommonUI">
+	<UserControl.Styles>
+		<Style Selector="rctr|GroupBox > StackPanel,
+						rctr|GroupBox > StackPanel > StackPanel">
+			<Setter Property="Orientation" Value="Vertical" />
+			<Setter Property="Spacing" Value="20" />
+		</Style>
+	</UserControl.Styles>
+	<ScrollViewer HorizontalScrollBarVisibility="Disabled">
+		<UniformGrid Columns="2">
+			<rctr:GroupBox Header="Normal">
+				<StackPanel>
+					<TextBox Watermark="Normal TextBox Watermark" />
+					<TextBox Watermark="Disabled TextBox Watermark"
+							IsEnabled="False" />
+					<TextBox Text="Normal TextBox Text" />
+					<TextBox Text="ReadOnly TextBox Text"
+							IsReadOnly="True" />
+					<TextBox Text="Disabled TextBox Text"
+							IsEnabled="False" />
+					<TextBox Text="Disabled ReadOnly TextBox Text"
+							IsReadOnly="True"
+							IsEnabled="False" />
+					<TextBox Watermark="TextBox with Clear button"
+							Text="TextBox Text to clear"
+							Classes="clearButton" />
+				</StackPanel>
+			</rctr:GroupBox>
+
+
+			<rctr:GroupBox Header="Floating Watermark">
+				<rctr:GroupBox.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="UseFloatingWatermark" Value="True" />
+					</Style>
+					<Style Selector="TextBox[IsEnabled=True]">
+						<Setter Property="Watermark" Value="Floating TextBox Watermark" />
+					</Style>
+					<Style Selector="TextBox[IsEnabled=False]">
+						<Setter Property="Watermark" Value="Disabled Floating TextBox Watermark" />
+					</Style>
+				</rctr:GroupBox.Styles>
+				<StackPanel>
+					<TextBox />
+					<TextBox IsEnabled="False" />
+					<StackPanel>
+						<StackPanel.Styles>
+							<Style Selector="TextBox">
+								<Setter Property="Text" Value="Sample text" />
+							</Style>
+						</StackPanel.Styles>
+						<TextBox />
+						<TextBox IsEnabled="False" />
+					</StackPanel>
+					<TextBox Watermark="TextBox with Clear button"
+							Text="TextBox Text to clear"
+							Classes="clearButton" />
+				</StackPanel>
+			</rctr:GroupBox>
+
+
+			<rctr:GroupBox Header="Password-input">
+				<rctr:GroupBox.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="Watermark" Value="Type stuff here..." />
+						<Setter Property="TextInputOptions.ContentType" Value="Password" />
+						<Setter Property="PasswordChar" Value="*" />
+					</Style>
+				</rctr:GroupBox.Styles>
+				<StackPanel>
+					<TextBox />
+					<TextBox Watermark="Type stuff here... (alternate PasswordChar)"
+							PasswordChar="•" />
+					<TextBox Watermark="TextBox with 'Reveal Password' button"
+							Classes="revealPasswordButton" />
+				</StackPanel>
+			</rctr:GroupBox>
+
+
+			<rctr:GroupBox Header="Password-input + Floating Watermark">
+				<rctr:GroupBox.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="UseFloatingWatermark" Value="True" />
+						<Setter Property="Watermark" Value="Type stuff here..." />
+						<Setter Property="TextInputOptions.ContentType" Value="Password" />
+						<Setter Property="PasswordChar" Value="*" />
+					</Style>
+				</rctr:GroupBox.Styles>
+				<StackPanel>
+					<TextBox />
+					<TextBox Watermark="Type stuff here... (alternate PasswordChar)"
+							PasswordChar="•" />
+					<TextBox Watermark="TextBox with 'Reveal Password' button"
+							Classes="revealPasswordButton" />
+				</StackPanel>
+			</rctr:GroupBox>
+		</UniformGrid>
+	</ScrollViewer>
 </UserControl>

@@ -4,8 +4,7 @@
                     xmlns:rctr="using:ReCap.CommonUI"
                     xmlns:v="using:ReCap.Hub.Views">
     <ControlTheme x:Key="{x:Type v:DialogOverlayView}"
-                TargetType="{x:Type v:DialogOverlayView}"
-                BasedOn="{StaticResource {x:Type ContentControl}}">
+                TargetType="{x:Type v:DialogOverlayView}">
         <Setter Property="Background" Value="{DynamicResource DialogOverlay.BackdropFilmBrush}" />
         <Setter Property="Template">
             <ControlTemplate>

@@ -1,66 +1,22 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:rctr="using:ReCap.CommonUI"
                     x:CompileBindings="True">
-    <ControlTheme x:Key="ReCapTextBoxButton" TargetType="Button">
-        <Setter Property="Background" Value="{DynamicResource TextControlButtonBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrush}" />
-        <Setter Property="Focusable" Value="False"/>
-        <Setter Property="MinWidth" Value="34" />
-        <Setter Property="Padding" Value="{DynamicResource ButtonPadding}" />
-        <Setter Property="Width" Value="{Binding $self.Bounds.Height}"/>
-        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextControlButtonForeground}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <ContentPresenter x:Name="PART_ContentPresenter"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Content="{TemplateBinding Content}"
-                                    Padding="{TemplateBinding Padding}">
-                    </ContentPresenter>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <ControlTheme x:Key="ReCapTextBoxButton"
+                TargetType="{x:Type Button}"
+                BasedOn="{StaticResource {x:Type Button}}">
+		<Setter Property="Padding" Value="4,0" />
 
-        <Style Selector="^:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPointerOver}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPointerOver}" />
-            <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPointerOver}" />
-        </Style>
-
-        <Style Selector="^:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPressed}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPressed}" />
-            <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPressed}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ ContentPresenter">
-            <Setter Property="Opacity" Value="0" />
+		<Style Selector="^ /template/ rctr|AngledBorder#AutoCornerBackground">
+		    <Setter Property="CornerRadius" Value="2" />
         </Style>
     </ControlTheme>
 
-    <ControlTheme x:Key="DsTextBoxToggleButton"
-                TargetType="ToggleButton"
-                BasedOn="{StaticResource ReCapTextBoxButton}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ToggleButton">
-                    <ContentPresenter x:Name="PART_ContentPresenter"
-                                    Background="{TemplateBinding Background}"
-                                    Content="{TemplateBinding Content}"
-                                    Padding="{TemplateBinding Padding}">
-                    </ContentPresenter>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
 
-        <Style Selector="^:checked /template/ ContentPresenter, ^:indeterminate /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPressed}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPressed}" />
-            <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPressed}" />
-        </Style>
-    </ControlTheme>
+    <ControlTheme x:Key="ReCapTextBoxToggleButton"
+                TargetType="{x:Type ToggleButton}"
+                BasedOn="{StaticResource ReCapTextBoxButton}" />
+
 
     <ControlTheme x:Key="{x:Type TextBox}" TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource TextBox.Background.Idle}" />
@@ -99,7 +55,7 @@
                                         Cursor="IBeam"
                                         Margin="{TemplateBinding Padding}">
                                     <TextBlock x:Name="PART_FloatingWatermark"
-                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Foreground="{DynamicResource TextBox.FloatingWatermark}"
                                             FontSize="{TemplateBinding FontSize}"
                                             IsVisible="False"
                                             Text="{TemplateBinding Watermark}"
@@ -202,12 +158,12 @@
         <Style Selector="^.revealPasswordButton[AcceptsReturn=False][IsReadOnly=False]:not(TextBox:empty)">
             <Setter Property="InnerRightContent">
                 <Template>
-                    <ToggleButton Theme="{StaticResource DsTextBoxToggleButton}"
+                    <ToggleButton Theme="{StaticResource ReCapTextBoxToggleButton}"
                                 IsChecked="{Binding $parent[TextBox].RevealPassword, Mode=TwoWay}">
                         <Panel>
                             <PathIcon Data="{StaticResource PasswordBoxRevealButtonData}"
                                     Height="8" Width="12"
-                                    IsVisible="{Binding $parent[ToggleButton].!IsChecked}"/>
+                                    IsVisible="{Binding !$parent[ToggleButton].IsChecked}"/>
                             <PathIcon Data="{StaticResource PasswordBoxHideButtonData}"
                                     Height="12" Width="12"
                                     IsVisible="{Binding $parent[ToggleButton].IsChecked}"/>
@@ -217,15 +173,22 @@
             </Setter>
         </Style>
 
-        <Style Selector="^.clearButton[AcceptsReturn=False][IsReadOnly=False]:focus:not(TextBox:empty)">
-            <Setter Property="InnerRightContent">
-                <Template>
-                    <Button Theme="{StaticResource ReCapTextBoxButton}"
-                            Command="{Binding $parent[TextBox].Clear}">
-                        <PathIcon Data="{StaticResource TextBoxClearButtonData}" Height="10" Width="10"/>
-                    </Button>
-                </Template>
-            </Setter>
+        <Style Selector="^.clearButton[AcceptsReturn=False][IsReadOnly=False]:not(TextBox:empty)">
+            <!--
+                Fluent styles include :focus but not :pointerover, but this causes the button to vanish before it can be clicked.
+                Is this the result of a bug/discrepancy in ReCap.CommonUI, or is that a blunder in Avalonia itself?
+            -->
+            <Style Selector="^:focus, ^:pointerover">
+                <Setter Property="InnerRightContent">
+                    <Template>
+                        <Button Theme="{StaticResource ReCapTextBoxButton}"
+                                Command="{Binding $parent[TextBox].Clear}">
+                            <PathIcon Data="{StaticResource TextBoxClearButtonData}"
+                                    Width="10" Height="10" />
+                        </Button>
+                    </Template>
+                </Setter>
+            </Style>
         </Style>
     </ControlTheme>
 </ResourceDictionary>

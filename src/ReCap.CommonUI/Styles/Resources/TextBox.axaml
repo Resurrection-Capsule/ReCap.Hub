@@ -33,4 +33,6 @@
 	<Color x:Key="TextBox.BorderBrush.Focused">#FFD3D4D4</Color>
 	<Color x:Key="TextBox.Foreground.Focused">#FFFFFFFF</Color>
 	<Color x:Key="TextBox.Selection.Focused">#FF0A0A0A</Color>
+
+	<Color x:Key="TextBox.FloatingWatermark">#C0FFFFFF</Color>
 </ResourceDictionary>

@@ -23,9 +23,6 @@
 					                Background="{DynamicResource Window.HoloShadow.Background.Opaque.Inactive}"
 									IsHitTestVisible="False" />
 					<Panel x:Name="MainContent">
-						<!--
-						<Border Background="{TemplateBinding Background}" IsHitTestVisible="False" />
-						-->
                         <Panel Background="Transparent" Margin="{TemplateBinding WindowDecorationMargin}" />
                         <VisualLayerManager>
                             <VisualLayerManager.ChromeOverlayLayer>
@@ -86,10 +83,6 @@
                                                     Margin="{TemplateBinding Padding}"
                                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-								    <TextBlock x:Name="TransparencyTest"
-										       Text="{TemplateBinding ActualTransparencyLevel}"
-										       HorizontalAlignment="Center"
-										       VerticalAlignment="Bottom" />
                                 </Panel>
                             </DockPanel>
                         </VisualLayerManager>
@@ -152,13 +145,20 @@
             <Setter Property="rctr:WindowChromeAddon.UseTransparencyHackHint" Value="True" />
 
 
-            <Style Selector="^ /template/ :is(Panel)#Frame">
+			<Style Selector="^ /template/ :is(Panel)#Frame">
                 <Setter Property="Margin" Value="{Binding OffScreenMargin, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
             </Style>
 
             <Style Selector="^[(rctr|WindowChromeAddon.ActualUseTransparencyHack)=True] /template/ Border#PART_TransparencyFallback">
                 <Setter Property="IsVisible" Value="False" />
             </Style>
+
+
+			<Style Selector="^[WindowState=Maximized], ^[WindowState=FullScreen]">
+				<Style Selector="^ /template/ rctr|AngledBorder#HoloShadow">
+					<Setter Property="Margin" Value="{Binding OffScreenMargin, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+				</Style>
+			</Style>
             
             <!-- Transparent -->
             <Style Selector="^[(rctr|WindowChromeAddon.ActualUseTransparencyHack)=True], ^[ActualTransparencyLevel=Transparent]">

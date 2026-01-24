@@ -186,15 +186,18 @@
 					<rctr:CaptionButton x:Name="PART_FullScreenButton"
 							IsVisible="False">
 					</rctr:CaptionButton>
-					<rctr:CaptionButton x:Name="PART_MinimizeButton">
+					<rctr:CaptionButton x:Name="PART_MinimizeButton"
+										Win32Properties.NonClientHitTestResult="MinButton">
 						<Path Data="M 0 0 L 13 0 L 13 4 L 0 4 Z"/>
 					</rctr:CaptionButton>
-					<rctr:CaptionButton x:Name="PART_RestoreButton">
+					<rctr:CaptionButton x:Name="PART_RestoreButton"
+										Win32Properties.NonClientHitTestResult="MaxButton">
 						<Path Classes="maxRestoreIcon"
 							Classes.maximized="{Binding WindowState, Converter={StaticResource IsMaxStateConverter}}"
 							Data="M 0 8 H 11 V -1 H 0 Z M 2 1 H 9 V 6 H 2 Z"/>
 					</rctr:CaptionButton>
-					<rctr:CaptionButton x:Name="PART_CloseButton">
+					<rctr:CaptionButton x:Name="PART_CloseButton"
+										Win32Properties.NonClientHitTestResult="Close">
 						<Path Data="{DynamicResource CloseButtonGlyphGeometry}" />
 								<!--M 0 0 L 4 0 L 5.5 2 L 7 0 L 11 0
 											L 9 4.5 L 11 9
