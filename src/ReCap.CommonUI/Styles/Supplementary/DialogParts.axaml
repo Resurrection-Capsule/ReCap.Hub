@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="using:ReCap.CommonUI"
-					x:CompileBindings="True">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
+                    x:CompileBindings="True">
     <SolidColorBrush x:Key="DialogOverlay.BackdropFilmBrush">#D8000000</SolidColorBrush>
     <!--#C0001040-->
 
@@ -46,7 +46,7 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel>
-                    <rctr:AngledBorder Background="{TemplateBinding Background}"
+                    <rcdec:AngledBorder Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     CornerRadius="5"
                                     InnerGlowColor="{DynamicResource Dialog.Body.InnerGlowColor}"
@@ -99,7 +99,7 @@
                             Height="5">
                         <Panel ClipToBounds="True"
                             DockPanel.Dock="Left">
-                            <rctr:AngledBorder Width="5"
+                            <rcdec:AngledBorder Width="5"
                                             Background="{TemplateBinding Background}"
                                             CornerRadius="0,5,0,0"
                                             InnerGlowColor="{DynamicResource Dialog.Footer.InnerGlowColor}"
@@ -111,7 +111,7 @@
 
                         <Panel ClipToBounds="True"
                             DockPanel.Dock="Right">
-                            <rctr:AngledBorder Width="5"
+                            <rcdec:AngledBorder Width="5"
                                             Background="{TemplateBinding Background}"
                                             CornerRadius="5,0,0,0"
                                             InnerGlowColor="{DynamicResource Dialog.Footer.InnerGlowColor}"
@@ -123,7 +123,7 @@
                     </DockPanel>
                     <Panel>
                         <Panel ClipToBounds="True">
-                            <rctr:AngledBorder Background="{TemplateBinding Background}"
+                            <rcdec:AngledBorder Background="{TemplateBinding Background}"
                                             CornerRadius="0,0,5,5"
                                             InnerGlowColor="{DynamicResource Dialog.Footer.InnerGlowColor}"
                                             InnerGlowSize="2"

@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="using:ReCap.CommonUI"
+                    xmlns:rctr="using:ReCap.CommonUI.Controls"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
                     x:CompileBindings="True">
     <ControlTheme x:Key="GroupBoxHeaderBackground"
-                TargetType="{x:Type rctr:AngledBorderEx}">
+                TargetType="{x:Type rcdec:AngledBorderEx}">
         <Setter Property="InvertSide" Value="Bottom" />
         <Setter Property="Background" Value="{DynamicResource Window.TitleBar.BackgroundBrush.Active}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Window.BottomEdgeTrim.BorderBrush}" />
@@ -21,7 +22,7 @@
     </ControlTheme>
 
     <ControlTheme x:Key="GroupBoxBodyBackground"
-                TargetType="{x:Type rctr:AngledBorderEx}">
+                TargetType="{x:Type rcdec:AngledBorderEx}">
         <Setter Property="Background" Value="{ReflectionBinding Background, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
         <Setter Property="BorderBrush" Value="{ReflectionBinding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
         <Setter Property="StrokeThickness" Value="1" />
@@ -33,17 +34,20 @@
     </ControlTheme>
     
 
-    <ControlTheme x:Key="{x:Type rctr:GroupBox}"
-                TargetType="{x:Type rctr:GroupBox}">
+    <ControlTheme x:Key="GroupBox"
+                TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource TabControl.Body.BorderBrush.Top}" />
         <Setter Property="Padding" Value="12" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="ContentPresenter.RecognizesAccessKey" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
                 <DockPanel>
                     <Panel DockPanel.Dock="Top"
                         Margin="0,0,0,1">
-                        <rctr:AngledBorderEx Theme="{DynamicResource GroupBoxHeaderBackground}" />
+                        <rcdec:AngledBorderEx Theme="{DynamicResource GroupBoxHeaderBackground}" />
                         <ContentPresenter x:Name="PART_HeaderPresenter"
                                         Classes="h4"
                                         Background="Transparent"
@@ -64,7 +68,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch">
                     -->
-                        <rctr:AngledBorderEx Theme="{DynamicResource GroupBoxBodyBackground}" />
+                        <rcdec:AngledBorderEx Theme="{DynamicResource GroupBoxBodyBackground}" />
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                         Background="Transparent"
                                         BorderBrush="Transparent"

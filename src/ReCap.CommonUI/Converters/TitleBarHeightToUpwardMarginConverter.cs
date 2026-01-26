@@ -3,7 +3,7 @@ using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Converters
 {
     public class TitleBarHeightToUpwardMarginConverter
         : IValueConverter
@@ -39,6 +39,6 @@ namespace ReCap.CommonUI
 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotImplementedException();
+            => throw new NotSupportedException();
     }
 }

@@ -1,6 +1,6 @@
 using Avalonia;
-using ReCap.CommonUI;
 using System;
+using ReCap.CommonUI.Util;
 
 namespace ReCap.Hub
 {

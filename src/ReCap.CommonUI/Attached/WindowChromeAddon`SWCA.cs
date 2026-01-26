@@ -7,6 +7,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using ReCap.CommonUI.Controls;
+using ReCap.CommonUI.Util;
+
 using static ReCap.CommonUI.WinUnmanagedMethods;
 
 namespace ReCap.CommonUI

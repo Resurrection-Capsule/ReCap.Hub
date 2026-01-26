@@ -35,7 +35,7 @@ namespace ReCap.Hub.Localization
             }
             
             string outPath = Path.Combine(
-                Environment.GetEnvironmentVariable(ReCap.CommonUI.OSInfo.IsWindows ? "USERPROFILE" : "HOME"),
+                Environment.GetEnvironmentVariable(ReCap.CommonUI.Util.OSInfo.IsWindows ? "USERPROFILE" : "HOME"),
                 "localization-dictionary.txt"
             );
             File.WriteAllLines(

@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ReCap.CommonUI.Reflection;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Util.Reflection
 {
-    public static class ReflectionHelper
+    internal static class ReflectionHelper
     {
         const BindingFlags _FLAGS_ALL = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
         

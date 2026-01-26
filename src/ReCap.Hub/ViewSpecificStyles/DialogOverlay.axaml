@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="using:ReCap.CommonUI"
-                    xmlns:rctr="using:ReCap.CommonUI"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
                     xmlns:v="using:ReCap.Hub.Views">
     <ControlTheme x:Key="{x:Type v:DialogOverlayView}"
                 TargetType="{x:Type v:DialogOverlayView}">
@@ -13,7 +13,7 @@
                             Margin="1">
                         <Rectangle DockPanel.Dock="Left" />
                         <Rectangle DockPanel.Dock="Right" />
-                        <rctr:AngledBorder Background="{TemplateBinding Background}"
+                        <rcdec:AngledBorder Background="{TemplateBinding Background}"
                                         CornerRadius="5" />
                     </DockPanel>
                     <ContentPresenter x:Name="PART_ContentPresenter"

@@ -1,7 +1,9 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Media;
-namespace ReCap.CommonUI
+using ReCap.CommonUI.Controls.Decorators;
+
+namespace ReCap.CommonUI.Controls.AppearanceHacks
 {
     public partial class TitleBarAngledBorder
         : AngledBorderBase

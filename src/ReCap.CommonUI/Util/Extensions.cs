@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Util
 {
-    public static partial class Extensions
+    public static class Extensions
     {
         public static bool TryGetHWnd(this Window win, out IntPtr hWnd)
         {

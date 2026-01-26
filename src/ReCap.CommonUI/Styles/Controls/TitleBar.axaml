@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:rctr="clr-namespace:ReCap.CommonUI">
-
+                    xmlns:rc="using:ReCap.CommonUI"
+					xmlns:rchax="using:ReCap.CommonUI.Controls.AppearanceHacks">
 	<ControlTheme x:Key="{x:Type TitleBar}" TargetType="TitleBar">
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Top" />
@@ -32,15 +32,15 @@
 									   IsHitTestVisible="False"
 									   VerticalAlignment="Center"
 									   Margin="{TemplateBinding Padding}"
-									   IsVisible="{Binding Path=(rctr:WindowChromeAddon.ManagedShowTitle), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay}"
+									   IsVisible="{Binding Path=(rc:WindowChromeAddon.ManagedShowTitle), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay}"
 									   />
-						<rctr:CaptionButtonsSizeBridge HorizontalAlignment="Right"
+						<rchax:CaptionButtonsSizeBridge HorizontalAlignment="Right"
 													   VerticalAlignment="Top">
 							<CaptionButtons x:Name="PART_CaptionButtons"
 											Foreground="{TemplateBinding Foreground}"
-											Classes.leftSideButtons="{Binding Path=(rctr:WindowChromeAddon.LeftSideButtons), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay}"
+											Classes.leftSideButtons="{Binding Path=(rc:WindowChromeAddon.LeftSideButtons), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay}"
 											Win32Properties.NonClientHitTestResult="Client" />
-						</rctr:CaptionButtonsSizeBridge>
+						</rchax:CaptionButtonsSizeBridge>
 					</Panel>
 				</Panel>
 			</ControlTemplate>

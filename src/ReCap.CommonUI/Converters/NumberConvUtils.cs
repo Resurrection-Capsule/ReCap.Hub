@@ -1,12 +1,9 @@
-﻿using Avalonia.Data.Converters;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using System;
+using Avalonia.Data.Converters;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Converters
 {
-    public static class NumberConvUtils
+    internal static class NumberConvUtils
     {
         public static double ObjectToDouble(object value)
         {

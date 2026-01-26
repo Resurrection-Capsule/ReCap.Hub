@@ -6,12 +6,14 @@ using ReCap.UITest.Views;
 
 namespace ReCap.UITest
 {
-    public partial class App : Application
+    public partial class App
+        : Application
     {
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
         }
+
 
         public override void OnFrameworkInitializationCompleted()
         {

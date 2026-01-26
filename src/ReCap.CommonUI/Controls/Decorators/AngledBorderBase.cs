@@ -4,22 +4,22 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
 using Avalonia.Media;
+using ReCap.CommonUI.Util;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.Decorators
 {
-    public abstract class AngledBorderBase : Decorator
+    public abstract class AngledBorderBase
+        : Decorator
     {
         const int BLUR_SPREAD_OFFSET = 100;
-        const int BLUR_SPREAD_AXIS_OFFSET = (int)(BLUR_SPREAD_OFFSET/* * 1.5*/);
+
 
         /// <summary>
         /// Defines the <see cref="Background"/> property.
         /// </summary>
         public static readonly StyledProperty<IBrush> BackgroundProperty =
             Border.BackgroundProperty.AddOwner<AngledBorderBase>();
-        /// <summary>
-        /// Gets or sets a brush with which to paint the background.
-        /// </summary>
+        /// <inheritdoc cref="Border.Background"/>
         public IBrush Background
         {
             get => GetValue(BackgroundProperty);
@@ -32,9 +32,7 @@ namespace ReCap.CommonUI
         /// </summary>
         public static readonly StyledProperty<IBrush> BorderBrushProperty =
             Border.BorderBrushProperty.AddOwner<AngledBorderBase>();
-        /// <summary>
-        /// Gets or sets a brush with which to paint the border.
-        /// </summary>
+        /// <inheritdoc cref="Border.BorderBrush"/>
         public IBrush BorderBrush
         {
             get => GetValue(BorderBrushProperty);
@@ -47,9 +45,7 @@ namespace ReCap.CommonUI
         /// </summary>
         public static readonly StyledProperty<double> StrokeThicknessProperty =
             Shape.StrokeThicknessProperty.AddOwner<AngledBorderBase>();
-        /// <summary>
-        /// Gets or sets the width of the shape outline.
-        /// </summary>
+        /// <see cref="Shape.StrokeThickness"/> 
         public double StrokeThickness
         {
             get => GetValue(StrokeThicknessProperty);
@@ -62,7 +58,9 @@ namespace ReCap.CommonUI
         /// </summary>
         public static readonly StyledProperty<double> InnerGlowSizeProperty =
             AvaloniaProperty.Register<AngledBorderBase, double>(nameof(InnerGlowSize), -1);
-        
+        /// <summary>
+        /// Gets or sets the size of the inward glow around the edges of the background.
+        /// </summary>
         public double InnerGlowSize
         {
             get => GetValue(InnerGlowSizeProperty);
@@ -75,6 +73,9 @@ namespace ReCap.CommonUI
         public static readonly StyledProperty<Color> InnerGlowColorProperty =
             AvaloniaProperty.Register<AngledBorderBase, Color>(nameof(InnerGlowColor));
         
+        /// <summary>
+        /// Gets or sets the color of the inward glow around the edges of the background.
+        /// </summary>
         public Color InnerGlowColor
         {
             get => GetValue(InnerGlowColorProperty);
@@ -110,7 +111,7 @@ namespace ReCap.CommonUI
 
 
 
-        BoxShadow _boxShadow = new BoxShadow()
+        BoxShadow _boxShadow = new()
         {
             OffsetX = 0,
             OffsetY = 0,
@@ -124,8 +125,6 @@ namespace ReCap.CommonUI
         Geometry _strokeGeometryOuter = null;
 #endif
         RoundedRect _glowRect = new RoundedRect(new Rect(0, 0, 3, 3), 0);
-        
-        Thickness _strokeThickness = new Thickness(0);
 
         
 
@@ -135,7 +134,6 @@ namespace ReCap.CommonUI
 
             StrokeThicknessProperty.Changed.AddClassHandler<AngledBorderBase>((s, e) => 
             {
-                s._strokeThickness = new Thickness(e.GetNewValue<double>());
                 AffectsGeometryInvalidate(s, e);
             });
 
@@ -196,21 +194,15 @@ namespace ReCap.CommonUI
         }
 
 
-        public AngledBorderBase() : base()
+        public AngledBorderBase()
+            : base()
         {
-            //_boxShadows = new BoxShadows(_boxShadow);
-            
-            var ctrl = (this as Control);
+            var ctrl = this;
             
             ctrl.LayoutUpdated += (s, e) => InvalidateGeometry();
             ctrl.AttachedToVisualTree += (s, e) => InvalidateGeometry();
         }
 
-        void OnBorderThicknessChanged(AvaloniaPropertyChangedEventArgs e)
-        {
-            var nv = e.NewValue;
-            //_averageBorderThickness = ((nv != null) && (nv is Thickness brdThck)) ? ((brdThck.Left + brdThck.Top + brdThck.Right + brdThck.Bottom) / 4) : 0;
-        }
 
         protected void InvalidateGeometry()
         {
@@ -261,9 +253,11 @@ namespace ReCap.CommonUI
         protected abstract void RefreshGeometry(out Geometry fillGeometry, out Geometry strokeGeometry, out RoundedRect glowRect);
         
 
+#if DEBUG_ANGLED_BORDER
         static readonly IBrush DEBUG_BRUSH = new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
         static readonly IBrush DEBUG_BRUSH_2 = new SolidColorBrush(Color.FromArgb(0x80, 0x00, 0x00, 0xFF));
         static readonly IBrush DEBUG_BRUSH_3 = new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0xFF, 0x00));
+#endif
         public override void Render(DrawingContext context)
         {
 #if DEBUG_ANGLED_BORDER
@@ -303,15 +297,12 @@ namespace ReCap.CommonUI
 #endif
         }
 
+
         static readonly Thickness ZERO = new Thickness(0);
         protected override Size MeasureOverride(Size availableSize)
-        {
-            return LayoutHelper.MeasureChild(Child, availableSize, Padding, ZERO);
-        }
+            => LayoutHelper.MeasureChild(Child, availableSize, Padding, ZERO);
 
         protected override Size ArrangeOverride(Size finalSize)
-        {
-            return LayoutHelper.ArrangeChild(Child, finalSize, Padding, ZERO);
-        }
+            => LayoutHelper.ArrangeChild(Child, finalSize, Padding, ZERO);
     }
 }

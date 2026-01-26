@@ -1,8 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="using:ReCap.CommonUI"
-        xmlns:rctr="using:ReCap.CommonUI"
-        xmlns:v="using:ReCap.Hub.Views">
+        xmlns:rc="using:ReCap.CommonUI">
     <Styles.Resources>
         <ResourceDictionary>
             <PathGeometry x:Key="LocalPlayTabIconData"
@@ -25,14 +23,14 @@
                             EndPoint="6,0" />
                 -->
                 <PathGeometry Figures="M 6 4.5 C 6 2.508373 5.6732487 0 3 0 0.3267513 0 0 2.508373 0 4.5"
-                            Transform="{rctr:TranslationMatrix 1.5,10.5}" />
+                            Transform="{rc:TranslationMatrix 1.5,10.5}" />
                 <EllipseGeometry RadiusX="2" RadiusY="2"
-                            Transform="{rctr:TranslationMatrix 4.5,8}" />
+                            Transform="{rc:TranslationMatrix 4.5,8}" />
                 
                 <PathGeometry Figures="M 6 4.5 C 6 2.508373 5.6732487 0 3 0 0.3267513 0 0 2.508373 0 4.5"
-                            Transform="{rctr:TranslationMatrix 8.5,10.5}" />
+                            Transform="{rc:TranslationMatrix 8.5,10.5}" />
                 <EllipseGeometry RadiusX="2" RadiusY="2"
-                            Transform="{rctr:TranslationMatrix 11.5,8}" />
+                            Transform="{rc:TranslationMatrix 11.5,8}" />
                 <!--
                     Transform="translate(2.5px,6px)"
                     Transform="translate(9.5px,6px)"

@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:local="using:ReCap.CommonUI"
-		xmlns:rctr="using:ReCap.CommonUI">
+		xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
 	<Style Selector="StackPanel.leftButtons,
 					StackPanel.rightButtons">
 		<Setter Property="Orientation" Value="Horizontal" />
@@ -21,30 +21,30 @@
 
 
 
-	<Style Selector=":is(Panel).leftButtons > :is(Button) /template/ rctr|AngledBorder#AutoCornerBackground,
-					:is(Panel).rightButtons > :is(Button) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Panel).leftButtons > :is(Button) /template/ rcdec|AngledBorder#AutoCornerBackground,
+					:is(Panel).rightButtons > :is(Button) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="0" />
 	</Style>
-	<Style Selector=":is(Panel).leftButtons > :is(Button):nth-child(1):not(:nth-last-child(1)) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Panel).leftButtons > :is(Button):nth-child(1):not(:nth-last-child(1)) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="0,0,0,4" />
 	</Style>
-	<Style Selector=":is(Panel).leftButtons > :is(Button):nth-last-child(1):not(:nth-child(1)) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Panel).leftButtons > :is(Button):nth-last-child(1):not(:nth-child(1)) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="0,4,0,0" />
 	</Style>
-	<Style Selector=":is(Panel).rightButtons > :is(Button):nth-child(1):not(:nth-last-child(1)) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Panel).rightButtons > :is(Button):nth-child(1):not(:nth-last-child(1)) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="4,0,0,0" />
 	</Style>
-	<Style Selector=":is(Panel).rightButtons > :is(Button):nth-last-child(1):not(:nth-child(1)) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Panel).rightButtons > :is(Button):nth-last-child(1):not(:nth-child(1)) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="0,0,4,0" />
 	</Style>
 
-	<Style Selector=":is(Button).left /template/ rctr|AngledBorder#AutoCornerBackground,
-					:is(Panel).leftButtons > :is(Button):nth-child(1):nth-last-child(1) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Button).left /template/ rcdec|AngledBorder#AutoCornerBackground,
+					:is(Panel).leftButtons > :is(Button):nth-child(1):nth-last-child(1) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="0,4,0,4" />
 	</Style>
 
-	<Style Selector=":is(Button).right /template/ rctr|AngledBorder#AutoCornerBackground,
-					:is(Panel).rightButtons > :is(Button):nth-child(1):nth-last-child(1) /template/ rctr|AngledBorder#AutoCornerBackground">
+	<Style Selector=":is(Button).right /template/ rcdec|AngledBorder#AutoCornerBackground,
+					:is(Panel).rightButtons > :is(Button):nth-child(1):nth-last-child(1) /template/ rcdec|AngledBorder#AutoCornerBackground">
 		<Setter Property="CornerRadius" Value="4,0,4,0" />
 	</Style>
 </Styles>

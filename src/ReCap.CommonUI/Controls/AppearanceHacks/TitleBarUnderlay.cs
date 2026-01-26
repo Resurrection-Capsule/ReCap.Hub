@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Globalization;
-using System.Reactive;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Chrome;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
-using Avalonia.Data.Converters;
 using Avalonia.Input;
-using Avalonia.Reactive;
-using Avalonia.ReactiveUI;
-using ReactiveUI;
+using ReCap.CommonUI.Util;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.AppearanceHacks
 {
     [PseudoClasses(_PSEUD_FILLS_SCREEN)]
     public class TitleBarUnderlay

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace ReCap.CommonUI
 {
-    public static class WinUnmanagedMethods
+    internal static class WinUnmanagedMethods
     {
         public const uint WM_NCHITTEST = 0x0084;
         public const uint WM_NCLBUTTONDOWN = 0x00A1;

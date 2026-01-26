@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Reactive;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Chrome;
-using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
-using Avalonia.Input;
 using Avalonia.Reactive;
-using Avalonia.ReactiveUI;
-using ReactiveUI;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Converters
 {
     public class StringFormatConverter
         : IMultiValueConverter

@@ -9,9 +9,11 @@ using Avalonia.Controls.Templates;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Metadata;
+using ReCap.CommonUI.Util;
+
 using TemplateBuildFunc = System.Func<Avalonia.Controls.Primitives.TemplatedControl, Avalonia.Controls.INameScope, Avalonia.Controls.Control>;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls
 {
     public delegate bool MatchIconResourceFunc(object resource, out TemplateBuildFunc buildFunc);
     public class IconPresenter
@@ -116,28 +118,7 @@ namespace ReCap.CommonUI
             }
             Template = EmptyTemplate;
         }
+        
         static readonly FuncControlTemplate EmptyTemplate = new FuncControlTemplate((c, n) => new Control());
-    }
-
-    public class TranslationMatrixExtension
-        : MarkupExtension
-    {
-        readonly Vector _translation;
-        public TranslationMatrixExtension(double x, double y)
-            : this(new Vector(x, y))
-        {}
-        public TranslationMatrixExtension(string vectorStr)
-            : this(Vector.Parse(vectorStr))
-        {}
-        public TranslationMatrixExtension(Vector translation)
-        {
-            _translation = translation;
-        }
-
-
-        public object ProvideValue()
-            => new MatrixTransform(Matrix.CreateTranslation(_translation));
-        public override object ProvideValue(IServiceProvider serviceProvider)
-            => ProvideValue();
     }
 }

@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using ReCap.CommonUI.Util;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.Decorators
 {
-    public class ImagePresenter : Control
+    public class ImagePresenter
+        : Control
     {
         /// <summary>
         /// Defines the <see cref="Source"/> property.

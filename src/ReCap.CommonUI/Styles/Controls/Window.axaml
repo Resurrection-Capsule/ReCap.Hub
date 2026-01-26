@@ -1,6 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:rctr="using:ReCap.CommonUI">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rc="using:ReCap.CommonUI"
+                    xmlns:rchax="using:ReCap.CommonUI.Controls.AppearanceHacks"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
     <ControlTheme x:Key="{x:Type Window}" TargetType="{x:Type Window}">
         <Setter Property="TopLevel.SystemBarColor" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
 		<Setter Property="Background" Value="{DynamicResource Window.Body.Background}" />
@@ -19,7 +21,7 @@
             <ControlTemplate>
                 <Panel>
                     <Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
-					<rctr:AngledBorder x:Name="HoloShadow"
+					<rcdec:AngledBorder x:Name="HoloShadow"
 					                Background="{DynamicResource Window.HoloShadow.Background.Opaque.Inactive}"
 									IsHitTestVisible="False" />
 					<Panel x:Name="MainContent">
@@ -29,8 +31,8 @@
                                 <TitleBar />
                             </VisualLayerManager.ChromeOverlayLayer>
                             <DockPanel x:Name="Frame">
-							    <rctr:TitleBarUnderlay DockPanel.Dock="Top" />
-                                <rctr:AngledBorderEx x:Name="BottomEdgeTrim"
+							    <rchax:TitleBarUnderlay DockPanel.Dock="Top" />
+                                <rcdec:AngledBorderEx x:Name="BottomEdgeTrim"
                                                     Classes="activateColoration"
                                                     BorderBrush="{DynamicResource Window.BottomEdgeTrim.BorderBrush}"
                                                     Height="14"
@@ -44,7 +46,7 @@
                                             
                                                     DockPanel.Dock="Bottom"
 												    Margin="0,-5,0,0" />
-                                <rctr:AngledBorderEx x:Name="TopEdgeTrim"
+                                <rcdec:AngledBorderEx x:Name="TopEdgeTrim"
                                                     Classes="activateColoration"
                                                     BorderBrush="{DynamicResource Window.BottomEdgeTrim.BorderBrush}"
                                                     InvertSide="Bottom"
@@ -58,7 +60,7 @@
                                                     DockPanel.Dock="Top"
                                                     IsVisible="False" />
                                 <Panel>
-                                    <rctr:AngledBorderEx x:Name="BgElement"
+                                    <rcdec:AngledBorderEx x:Name="BgElement"
                                                         TopLeftCut="6"
                                                         TopRightCut="6"
                                                         BottomRightCut="6"
@@ -93,24 +95,24 @@
 
 
 
-        <Style Selector="^ /template/ rctr|AngledBorderEx.activateColoration">
+        <Style Selector="^ /template/ rcdec|AngledBorderEx.activateColoration">
 			<Setter Property="StrokeThickness" Value="1" />
 		</Style>
 
-		<Style Selector="^ /template/ rctr|AngledBorderEx.activateColoration">
+		<Style Selector="^ /template/ rcdec|AngledBorderEx.activateColoration">
 			<Setter Property="Background" Value="{DynamicResource Window.TitleBar.BackgroundBrush.Inactive}" />
 		</Style>
 
 		<Style Selector="^[IsActive=True]">
-			<Style Selector="^ /template/ rctr|AngledBorderEx.activateColoration">
+			<Style Selector="^ /template/ rcdec|AngledBorderEx.activateColoration">
 			    <Setter Property="Background" Value="{DynamicResource Window.TitleBar.BackgroundBrush.Active}" />
 		    </Style>
-		    <Style Selector="^ /template/ rctr|AngledBorder#HoloShadow">
+		    <Style Selector="^ /template/ rcdec|AngledBorder#HoloShadow">
 			    <Setter Property="Background" Value="{DynamicResource Window.HoloShadow.Background.Opaque.Active}" />
 		    </Style>
 		</Style>
         
-        <Style Selector="^ /template/ rctr|AngledBorderEx#TopEdgeTrim">
+        <Style Selector="^ /template/ rcdec|AngledBorderEx#TopEdgeTrim">
             <Setter Property="Height" Value="14" />
 		</Style>
 
@@ -119,7 +121,7 @@
 
         <!-- System decorations -->
 		<Style Selector="^[IsExtendedIntoWindowDecorations=False]">
-            <Style Selector="^ /template/ rctr|AngledBorderEx#TopEdgeTrim">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#TopEdgeTrim">
                 <Setter Property="IsVisible" Value="True" />
 				<Setter Property="Margin" Value="0,0,0,-5" />
 			</Style>
@@ -127,7 +129,7 @@
                 <Setter Property="Margin" Value="-2,-6" />
             </Style>
             <!--
-            <Style Selector="^ /template/ rctr|AngledBorderEx#BottomEdgeTrim">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#BottomEdgeTrim">
                 <Setter Property="StrokeThickness" Value="1" />
             </Style>
             -->
@@ -142,47 +144,47 @@
             <Setter Property="ExtendClientAreaTitleBarHeightHint" Value="32" />
             <Setter Property="TransparencyLevelHint" Value="Transparent" />
             <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-            <Setter Property="rctr:WindowChromeAddon.UseTransparencyHackHint" Value="True" />
+            <Setter Property="rc:WindowChromeAddon.UseTransparencyHackHint" Value="True" />
 
 
 			<Style Selector="^ /template/ :is(Panel)#Frame">
                 <Setter Property="Margin" Value="{Binding OffScreenMargin, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
             </Style>
 
-            <Style Selector="^[(rctr|WindowChromeAddon.ActualUseTransparencyHack)=True] /template/ Border#PART_TransparencyFallback">
+            <Style Selector="^[(rc|WindowChromeAddon.ActualUseTransparencyHack)=True] /template/ Border#PART_TransparencyFallback">
                 <Setter Property="IsVisible" Value="False" />
             </Style>
 
 
 			<Style Selector="^[WindowState=Maximized], ^[WindowState=FullScreen]">
-				<Style Selector="^ /template/ rctr|AngledBorder#HoloShadow">
+				<Style Selector="^ /template/ rcdec|AngledBorder#HoloShadow">
 					<Setter Property="Margin" Value="{Binding OffScreenMargin, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
 				</Style>
 			</Style>
             
             <!-- Transparent -->
-            <Style Selector="^[(rctr|WindowChromeAddon.ActualUseTransparencyHack)=True], ^[ActualTransparencyLevel=Transparent]">
+            <Style Selector="^[(rc|WindowChromeAddon.ActualUseTransparencyHack)=True], ^[ActualTransparencyLevel=Transparent]">
 				<Style Selector="^[WindowState=Normal]">
-				    <Style Selector="^ /template/ rctr|AngledBorder#HoloShadow">
+				    <Style Selector="^ /template/ rcdec|AngledBorder#HoloShadow">
                         <Setter Property="Background" Value="{DynamicResource Window.HoloShadow.Background.Translucent}" />
                         <Setter Property="BorderBrush" Value="{DynamicResource Window.HoloShadow.BorderBrush.Translucent}" />
                         <Setter Property="StrokeThickness" Value="2" />
                         <Setter Property="CornerRadius" Value="9" />
                         <Setter Property="Margin" Value="0,2,4,0" />
                     </Style>
-                    <Style Selector="^[IsActive=False] /template/ rctr|AngledBorder#HoloShadow">
+                    <Style Selector="^[IsActive=False] /template/ rcdec|AngledBorder#HoloShadow">
                         <Setter Property="Opacity" Value="0.5" />
                     </Style>
                     <Style Selector="^ /template/ Panel#MainContent">
                         <Setter Property="Margin" Value="4,0,0,6" />
                     </Style>
                     <!--
-                    <Style Selector="^ /template/ rctr|AngledBorderEx#TopEdgeTrim">
+                    <Style Selector="^ /template/ rcdec|AngledBorderEx#TopEdgeTrim">
                         <Setter Property="TopLeftCut" Value="6" />
                         <Setter Property="TopRightCut" Value="6" />
                     </Style>
                     -->
-                    <Style Selector="^ /template/ rctr|AngledBorderEx#BottomEdgeTrim">
+                    <Style Selector="^ /template/ rcdec|AngledBorderEx#BottomEdgeTrim">
                         <Setter Property="BottomLeftCut" Value="6" />
                         <Setter Property="BottomRightCut" Value="6" />
                     </Style>
@@ -191,7 +193,7 @@
 			
 			
 			<!-- Opaque -->
-            <Style Selector="^[(rctr|WindowChromeAddon.ActualUseTransparencyHack)=False], ^:not(^[ActualTransparencyLevel=Transparent])">
+            <Style Selector="^[(rc|WindowChromeAddon.ActualUseTransparencyHack)=False], ^:not(^[ActualTransparencyLevel=Transparent])">
             </Style>
 		</Style>
     </ControlTheme>

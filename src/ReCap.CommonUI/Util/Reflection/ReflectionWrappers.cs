@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 
-namespace ReCap.CommonUI.Reflection
+namespace ReCap.CommonUI.Util.Reflection
 {
-    public class MethodWrapper
+    internal class MethodWrapper
     {
         protected readonly MethodInfo _methodInfo;
         internal MethodWrapper(MethodInfo methodInfo)
@@ -26,7 +26,9 @@ namespace ReCap.CommonUI.Reflection
         protected static object[] ToParamArray(params object[] objects)
             => objects;
     }
-    public class OMethodWrapper<TOwner>
+
+
+    internal class OMethodWrapper<TOwner>
         : MethodWrapper
     {
         internal OMethodWrapper(MethodInfo methodInfo)
@@ -58,7 +60,8 @@ namespace ReCap.CommonUI.Reflection
     */
     }
 
-    public class OPMethodWrapper<TOwner, TParam1>
+
+    internal class OPMethodWrapper<TOwner, TParam1>
         : OMethodWrapper<TOwner>
     {
         internal OPMethodWrapper(MethodInfo methodInfo)
@@ -83,7 +86,8 @@ namespace ReCap.CommonUI.Reflection
             => CallInternalT<TRet>(instance, p1);
     }
 
-    public class OPMethodWrapper<TOwner, TParam1, TParam2>
+
+    internal class OPMethodWrapper<TOwner, TParam1, TParam2>
         : OMethodWrapper<TOwner>
     {
         internal OPMethodWrapper(MethodInfo methodInfo)
@@ -108,7 +112,8 @@ namespace ReCap.CommonUI.Reflection
             => CallInternalT<TRet>(instance, p1, p2);
     }
 
-    public class OPMethodWrapper<TOwner, TParam1, TParam2, TParam3>
+
+    internal class OPMethodWrapper<TOwner, TParam1, TParam2, TParam3>
         : OMethodWrapper<TOwner>
     {
         internal OPMethodWrapper(MethodInfo methodInfo)
@@ -133,7 +138,8 @@ namespace ReCap.CommonUI.Reflection
             => CallInternalT<TRet>(instance, p1, p2, p3);
     }
 
-    public class OPMethodWrapper<TOwner, TParam1, TParam2, TParam3, TParam4>
+
+    internal class OPMethodWrapper<TOwner, TParam1, TParam2, TParam3, TParam4>
         : OMethodWrapper<TOwner>
     {
         internal OPMethodWrapper(MethodInfo methodInfo)

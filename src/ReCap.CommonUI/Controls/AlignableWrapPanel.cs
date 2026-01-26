@@ -1,23 +1,24 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
-using Avalonia.Controls.Utils;
 using Avalonia.Layout;
-using Avalonia.Media;
-using Avalonia.Visuals;
-using Avalonia.VisualTree;
 using System;
-using System.Collections.Generic;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls
 {
     //https://gist.github.com/gmanny/7450651
     //https://stackoverflow.com/questions/806777/wpf-how-can-i-center-all-items-in-a-wrappanel/7747002#7747002
-    public class AlignableWrapPanel : Panel
+
+    /// <inheritdoc cref="WrapPanel"/>
+    public class AlignableWrapPanel
+        : Panel
     {
+        /// <summary>
+        /// Defines the <see cref="HorizontalContentAlignment"/> property.
+        /// </summary>
         public static readonly StyledProperty<HorizontalAlignment> HorizontalContentAlignmentProperty =
             AvaloniaProperty.Register<AlignableWrapPanel, HorizontalAlignment>(nameof(HorizontalContentAlignment), HorizontalAlignment.Left);
 
+        /// <inheritdoc cref="ContentControl.HorizontalContentAlignment"/>
         public HorizontalAlignment HorizontalContentAlignment
         {
             get => GetValue(HorizontalContentAlignmentProperty);
@@ -27,14 +28,14 @@ namespace ReCap.CommonUI
 
         static AlignableWrapPanel()
         {
-            AffectsArrange<AngledBorderEx>(HorizontalContentAlignmentProperty);
+            AffectsArrange<AlignableWrapPanel>(HorizontalContentAlignmentProperty);
         }
 
 
         protected override Size MeasureOverride(Size constraint)
         {
-            Size curLineSize = new Size();
-            Size panelSize = new Size();
+            Size curLineSize = new();
+            Size panelSize = new();
 
             var children = Children;
 
@@ -54,7 +55,7 @@ namespace ReCap.CommonUI
                     if (sz.Width > constraint.Width) // if the element is wider then the constraint - give it a separate line                    
                     {
                         panelSize = new Size(Math.Max(sz.Width, panelSize.Width), panelSize.Height + sz.Height);
-                        curLineSize = new Size();
+                        curLineSize = new();
                     }
                 }
                 else //continue to accumulate a line
@@ -70,7 +71,7 @@ namespace ReCap.CommonUI
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
             int firstInLine = 0;
-            Size curLineSize = new Size();
+            Size curLineSize = new();
             double accumulatedHeight = 0;
             var children = Children;
 
@@ -89,7 +90,7 @@ namespace ReCap.CommonUI
                     {
                         ArrangeLine(accumulatedHeight, sz, arrangeBounds.Width, i, ++i);
                         accumulatedHeight += sz.Height;
-                        curLineSize = new Size();
+                        curLineSize = new();
                     }
                     firstInLine = i;
                 }
@@ -114,7 +115,7 @@ namespace ReCap.CommonUI
             }
             else if (HorizontalContentAlignment == HorizontalAlignment.Right)
             {
-                x = (boundsWidth - lineSize.Width);
+                x = boundsWidth - lineSize.Width;
             }
 
             var children = Children;

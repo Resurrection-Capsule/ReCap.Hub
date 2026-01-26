@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Util
 {
     public static class OSInfo
     {

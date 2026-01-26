@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="clr-namespace:ReCap.CommonUI">
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
     <ControlTheme x:Key="TabItemThemeBase"
                 TargetType="ContentControl">
         <Setter Property="Padding" Value="10,4" />
@@ -20,15 +20,15 @@
                                     Fill="{DynamicResource TabItem.BottomEdgeBorderBrush.Idle}" />
                         </DockPanel>
                         <Panel ClipToBounds="True">
-                            <rctr:AngledBorder x:Name="BackgroundBorder"
+                            <rcdec:AngledBorder x:Name="BackgroundBorder"
                                             BorderBrush="{DynamicResource TabItem.BorderBrush.Idle}"
                                             StrokeThickness="2"
                                             CornerRadius="3,3,0,0"
                                             Margin="0,0,0,-3">
-                                <rctr:AngledBorder Background="{DynamicResource TabItem.Background.Idle}"
+                                <rcdec:AngledBorder Background="{DynamicResource TabItem.Background.Idle}"
                                                 Margin="1,1,1,0"
                                                 CornerRadius="1,1,0,0" />
-                            </rctr:AngledBorder>
+                            </rcdec:AngledBorder>
                         </Panel>
                     </DockPanel>
                     <ContentPresenter x:Name="PART_ContentPresenter"
@@ -55,10 +55,10 @@
             <Style Selector="^ /template/ Rectangle.middle">
                 <Setter Property="Fill" Value="{DynamicResource TabItem.BottomEdgeBorderBrush.Selected}" />
             </Style>
-            <Style Selector="^ /template/ rctr|AngledBorder#BackgroundBorder">
+            <Style Selector="^ /template/ rcdec|AngledBorder#BackgroundBorder">
                 <Setter Property="BorderBrush" Value="{DynamicResource TabItem.BorderBrush.Selected}" />
             </Style>
-            <Style Selector="^ /template/ rctr|AngledBorder#BackgroundBorder > rctr|AngledBorder">
+            <Style Selector="^ /template/ rcdec|AngledBorder#BackgroundBorder > rcdec|AngledBorder">
                 <Setter Property="Background" Value="{DynamicResource TabItem.Background.Selected}" />
             </Style>
         </Style>
@@ -67,7 +67,7 @@
         </Style>
 
         <!--  PointerOver state  -->
-        <Style Selector="^:pointerover:not(:pressed) /template/ rctr|AngledBorder#BackgroundBorder > rctr|AngledBorder">
+        <Style Selector="^:pointerover:not(:pressed) /template/ rcdec|AngledBorder#BackgroundBorder > rcdec|AngledBorder">
             <Setter Property="Background" Value="{DynamicResource TabItem.Background.Selected}" />
         </Style>
 

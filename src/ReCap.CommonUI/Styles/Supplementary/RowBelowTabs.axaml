@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="using:ReCap.CommonUI"
-					x:CompileBindings="True">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
+                    x:CompileBindings="True">
 	<Color x:Key="RowBelowTabs.Background.Top">#80B7CFDA</Color>
 	<!--
 		48B7CFDA
@@ -67,7 +67,7 @@
                 <Panel>
 					<Panel ClipToBounds="True"
 						Margin="0,0,0,-5">
-						<rctr:AngledBorderEx InvertSide="Bottom"
+						<rcdec:AngledBorderEx InvertSide="Bottom"
 											Background="{TemplateBinding Background}"
 											BorderBrush="{TemplateBinding BorderBrush}"
 											StrokeThickness="1"

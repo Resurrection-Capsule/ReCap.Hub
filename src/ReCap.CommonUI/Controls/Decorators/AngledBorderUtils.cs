@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Avalonia;
+using Avalonia.Media;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.Decorators
 {
-    internal enum BoundsPortion : int
+    internal enum BoundsPortion
+        : int
     {
         Left = 0b0001,
         Bottom = 0b0010,
@@ -16,6 +18,8 @@ namespace ReCap.CommonUI
         BottomRight = Bottom | Right,
         BottomLeft = Bottom | Left,
     }
+
+
     internal static partial class AngledBorderUtils
     {
         static void AddInOrder(IEnumerable<Point> addFrom, ref List<Point> points)
@@ -177,5 +181,82 @@ namespace ReCap.CommonUI
             cutPoint = new Point(x, y);
             hasCutPoint = true;
         }
+
+
+
+
+        public static void CreateGeometry(this StreamGeometryContext ctx, double x, double y, double width, double height, double tl, double tr, double br, double bl, bool isFilled)
+        {
+            if (tl > 0)
+            {
+                ctx.BeginFigure(new Point(x, y + tl), isFilled);
+                ctx.LineTo(new Point(x + tl, y));
+            }
+            else
+                ctx.BeginFigure(new Point(x, y), isFilled);
+            
+            //////ctx.TraverseGeometry(x, y, width, height, tl, tr, br, bl, true);
+
+
+            if (tr > 0)
+            {
+                ctx.LineTo(new Point(x + (width - tr), y));
+                ctx.LineTo(new Point(x + width, y + tr));
+            }
+            else
+                ctx.LineTo(new Point(x + width, y));
+            
+
+            if (br > 0)
+            {
+                ctx.LineTo(new Point(x + width, y + (height - br)));
+                ctx.LineTo(new Point(x + (width - br), y + height));
+            }
+            else
+                ctx.LineTo(new Point(x + width, y + height));
+            
+
+            if (bl > 0)
+            {
+                ctx.LineTo(new Point(x + bl, y + height));
+                ctx.LineTo(new Point(x, y + (height - bl)));
+            }
+            else
+                ctx.LineTo(new Point(x, y + height));
+
+
+            ctx.EndFigure(true);
+        }
+
+        public static void TraverseGeometry(this StreamGeometryContext ctx, double x, double y, double width, double height, double tl, double tr, double br, double bl, bool outer)
+        {
+            List<Action> steps = new List<Action>()
+            {
+                () => ctx.LineTo(new Point(x + tl, y)),
+                () => ctx.LineTo(new Point(x + (width - tr), y)),
+                () => ctx.LineTo(new Point(x + width, y + tr)),
+                () => ctx.LineTo(new Point(x + width, y + (height - br))),
+                () => ctx.LineTo(new Point(x + (width - br), y + height)),
+                () => ctx.LineTo(new Point(x + bl, y + height)),
+                () => ctx.LineTo(new Point(x, y + (height - bl))),
+            };
+            if (!outer)
+                steps.Insert(0, () => new Point(x, y + tl));
+
+            for (int i = 0; i < steps.Count; i++)
+                steps[outer ? i : steps.Count - (i)]();
+        }
+        /*public static void CreateGeometry(this StreamGeometryContext ctx, double width, double height, double tl, double tr, double br, double bl, bool isFilled)
+        {
+            ctx.BeginFigure(new Point(1, tl), isFilled);
+            ctx.LineTo(new Point(tl, 1));
+            ctx.LineTo(new Point(width - tr, 1));
+            ctx.LineTo(new Point(width, tr));
+            ctx.LineTo(new Point(width, height - br));
+            ctx.LineTo(new Point(width - br, height));
+            ctx.LineTo(new Point(bl, height));
+            ctx.LineTo(new Point(1, height - bl));
+            ctx.EndFigure(true);
+        }*/
     }
 }

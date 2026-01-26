@@ -3,7 +3,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:v="using:ReCap.Hub.Views"
             xmlns:vm="using:ReCap.Hub.ViewModels"
-            xmlns:rctr="using:ReCap.CommonUI">
+            xmlns:rc="using:ReCap.CommonUI"
+            xmlns:rctr="using:ReCap.CommonUI.Controls">
     <UserControl.Styles>
 		<Style Selector=":is(Window).inventoryTabs TabControl#TopTabs">
 			<Setter Property="Theme" Value="{DynamicResource InventoryTabs}" />
@@ -17,7 +18,7 @@
 								HorizontalAlignment="Left"
 								Shape.Fill="{Binding $parent[ContentPresenter].Foreground, Mode=OneWay}"
 								Shape.Stroke="{Binding $parent[ContentPresenter].Foreground, Mode=OneWay}" />
-						<TextBlock rctr:BindDynamicResource.ResourceKey="{Binding TitleKey, Mode=OneWay}"
+						<TextBlock rc:BindDynamicResource.ResourceKey="{Binding TitleKey, Mode=OneWay}"
 								VerticalAlignment="Center" />
 					</StackPanel>
 				</DataTemplate>
@@ -31,7 +32,7 @@
 		<Style Selector=":is(Window):not(.inventoryTabs) TabControl#TopTabs">
 			<Setter Property="ItemTemplate">
 				<DataTemplate DataType="{x:Type vm:TabViewModel}">
-					<TextBlock rctr:BindDynamicResource.ResourceKey="{Binding TitleKey, Mode=OneWay}" />
+					<TextBlock rc:BindDynamicResource.ResourceKey="{Binding TitleKey, Mode=OneWay}" />
 				</DataTemplate>
 			</Setter>
 		</Style>

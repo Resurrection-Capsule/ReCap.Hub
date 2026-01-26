@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:rctr="using:ReCap.CommonUI"
+					xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
                     x:CompileBindings="True">
     <ControlTheme x:Key="ReCapTextBoxButton"
                 TargetType="{x:Type Button}"
                 BasedOn="{StaticResource {x:Type Button}}">
 		<Setter Property="Padding" Value="4,0" />
 
-		<Style Selector="^ /template/ rctr|AngledBorder#AutoCornerBackground">
+		<Style Selector="^ /template/ rcdec|AngledBorder#AutoCornerBackground">
 		    <Setter Property="CornerRadius" Value="2" />
         </Style>
     </ControlTheme>

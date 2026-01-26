@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.Decorators
 {
-    public class SlicedImage : AvaloniaObject, IPresentableImage
+    public class SlicedImage
+        : AvaloniaObject
+        , IPresentableImage
     {
         /// <summary>
         /// Defines the <see cref="Source"/> property.

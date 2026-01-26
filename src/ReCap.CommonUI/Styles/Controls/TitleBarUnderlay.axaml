@@ -1,8 +1,11 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:rctr="clr-namespace:ReCap.CommonUI">
-	<ControlTheme x:Key="{x:Type rctr:TitleBarUnderlay}"
-				  TargetType="{x:Type rctr:TitleBarUnderlay}">
+                    xmlns:rc="using:ReCap.CommonUI"
+                    xmlns:rchax="using:ReCap.CommonUI.Controls.AppearanceHacks"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
+					xmlns:rccnv="using:ReCap.CommonUI.Converters">
+	<ControlTheme x:Key="{x:Type rchax:TitleBarUnderlay}"
+				  TargetType="{x:Type rchax:TitleBarUnderlay}">
 		<Setter Property="VerticalAlignment" Value="Top" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="Background" Value="Transparent" />
@@ -15,13 +18,13 @@
 					Background="#01000000">
 					<DockPanel>
 						<Rectangle x:Name="PART_CaptionButtonsProxy"
-								   Width="{Binding $parent[Window].(rctr:CaptionButtonsSizeBridge.CaptionButtonsWidth), Mode=OneWay}"
+								   Width="{Binding $parent[Window].(rchax:CaptionButtonsSizeBridge.CaptionButtonsWidth), Mode=OneWay}"
 								   IsHitTestVisible="False"
 								   IsTabStop="False"
 								   Focusable="False"
 								   DockPanel.Dock="Right" />
 						<Panel x:Name="TitleBarBackgroundMainContainer">
-							<rctr:AngledBorderEx x:Name="TitleBarBackgroundMain"
+							<rcdec:AngledBorderEx x:Name="TitleBarBackgroundMain"
 												Classes="activateColoration"
 												BorderBrush="{DynamicResource Window.TitleBar.BorderBrush}"
 												IsHitTestVisible="False"
@@ -37,28 +40,28 @@
 		</Setter>
 
 		<Style Selector="^[IsTitleBarVisible=False][IsVisible=True]">
-			<Setter Property="Margin" Value="{Binding $self.DefaultTitleBarHeight, Converter={x:Static rctr:TitleBarHeightToUpwardMarginConverter.Instance}, ConverterParameter=14, Mode=OneWay}" />
+			<Setter Property="Margin" Value="{Binding $self.DefaultTitleBarHeight, Converter={x:Static rccnv:TitleBarHeightToUpwardMarginConverter.Instance}, ConverterParameter=14, Mode=OneWay}" />
 		</Style>
 		<Style Selector="^[IsTitleBarVisible=True][IsTitleBarHeightValid=True]">
 			<Setter Property="Height" Value="{Binding $self.TitleBarHeight, Mode=OneWay}" />
 		</Style>
 
 
-		<Style Selector="^ /template/ :is(rctr|AngledBorderBase).activateColoration">
+		<Style Selector="^ /template/ :is(rcdec|AngledBorderBase).activateColoration">
 			<Setter Property="StrokeThickness" Value="1" />
 			<Setter Property="Background" Value="{DynamicResource Window.TitleBar.BackgroundBrush.Inactive}" />
 		</Style>
 
 		<Style Selector="^[IsWindowActive=True]">
-			<Style Selector="^ /template/ :is(rctr|AngledBorderBase).activateColoration">
+			<Style Selector="^ /template/ :is(rcdec|AngledBorderBase).activateColoration">
 				<Setter Property="Background" Value="{DynamicResource Window.TitleBar.BackgroundBrush.Active}" />
 			</Style>
 		</Style>
 
 
-		<Style Selector=":is(Window)[(rctr|WindowChromeAddon.ActualUseTransparencyHack)=True] /template/ ^, :is(Window)[ActualTransparencyLevel=Transparent] /template/ ^">
+		<Style Selector=":is(Window)[(rc|WindowChromeAddon.ActualUseTransparencyHack)=True] /template/ ^, :is(Window)[ActualTransparencyLevel=Transparent] /template/ ^">
 			<Style Selector="^:not(:fills_screen)">
-				<Style Selector="^ /template/ rctr|AngledBorderEx#TitleBarBackgroundMain">
+				<Style Selector="^ /template/ rcdec|AngledBorderEx#TitleBarBackgroundMain">
 					<Setter Property="TopLeftCut" Value="6" />
 				</Style>
 			</Style>

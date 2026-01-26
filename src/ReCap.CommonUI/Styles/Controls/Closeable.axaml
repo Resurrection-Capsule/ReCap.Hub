@@ -1,10 +1,12 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="using:ReCap.CommonUI"
+                    xmlns:rctr="using:ReCap.CommonUI.Controls"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
+                    xmlns:rceas="using:ReCap.CommonUI.Easings"
                     xmlns:sys="using:System">
     <sys:TimeSpan x:Key="Closeable.AnimationDuration">0:0:0.375</sys:TimeSpan>
 
-    <rctr:HybridEaseInOut x:Key="Closeable.Animation.ScaleXEasing" />
+    <rceas:HybridEaseInOut x:Key="Closeable.Animation.ScaleXEasing" />
     <QuinticEaseIn x:Key="Closeable.Animation.ScaleYEasing" />
     
     
@@ -42,7 +44,7 @@
             <ControlTemplate>
                 <Panel x:Name="DialogRoot"
                     ClipToBounds="False">
-                    <rctr:AngledBorder x:Name="NormalHoloShadow"
+                    <rcdec:AngledBorder x:Name="NormalHoloShadow"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     StrokeThickness="2"
@@ -58,7 +60,7 @@
                                     Padding="{TemplateBinding Padding}"
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                    <rctr:AngledBorder x:Name="FlashHoloShadow"
+                    <rcdec:AngledBorder x:Name="FlashHoloShadow"
                                     Background="#FFFFFFFF"
                                     CornerRadius="{Binding #NormalHoloShadow.CornerRadius, Mode=OneWay}"
                                     Margin="{Binding #NormalHoloShadow.Margin, Mode=OneWay}" />
@@ -95,7 +97,7 @@
                 </Animation>
             </Style.Animations>
 
-            <Style Selector="^ /template/ rctr|AngledBorder#FlashHoloShadow">
+            <Style Selector="^ /template/ rcdec|AngledBorder#FlashHoloShadow">
                 <Style.Animations>
                     <Animation Duration="{StaticResource Closeable.AnimationDuration}"
                             FillMode="Both">

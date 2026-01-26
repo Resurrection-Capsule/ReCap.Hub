@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Animation.Easings;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Easings
 {
     public class HybridEaseInOut
         : Easing

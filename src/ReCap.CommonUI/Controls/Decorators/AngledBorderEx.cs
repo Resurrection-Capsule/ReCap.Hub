@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Media;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.Decorators
 {
     public enum InvertedSide
     {
@@ -14,6 +13,13 @@ namespace ReCap.CommonUI
         Top = 3
     }
 
+
+    /// <summary>
+    /// A control which decorates a child with a border and background. Similar to <see cref="AngledBorder"/>, but but with corner insets and <see cref="InvertSide"/>.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="AngledBorderEx"/>'s drawing logic is more complex, so prefer <see cref="AngledBorder"/> where possible.
+    /// </remarks>
     public partial class AngledBorderEx
         : AngledBorderBase
     {
@@ -180,26 +186,16 @@ namespace ReCap.CommonUI
 
             double minDimen = Math.Min(width, height);
 
-            double tl = 0;
-            double tr = 0;
-            double br = 0;
-            double bl = 0;
 
-            double tlInset = 0;
-            double trInset = 0;
-            double brInset = 0;
-            double blInset = 0;
+            double tl = Math.Min(TopLeftCut, minDimen);
+            double tr = Math.Min(TopRightCut, minDimen);
+            double br = Math.Min(BottomRightCut, minDimen);
+            double bl = Math.Min(BottomLeftCut, minDimen);
 
-
-            tl = Math.Min(TopLeftCut, minDimen);
-            tr = Math.Min(TopRightCut, minDimen);
-            br = Math.Min(BottomRightCut, minDimen);
-            bl = Math.Min(BottomLeftCut, minDimen);
-
-            tlInset = Math.Min(TopLeftInset, width);
-            trInset = Math.Min(TopRightInset, width);
-            brInset = Math.Min(BottomRightInset, width);
-            blInset = Math.Min(BottomLeftInset, width);
+            double tlInset = Math.Min(TopLeftInset, width);
+            double trInset = Math.Min(TopRightInset, width);
+            double brInset = Math.Min(BottomRightInset, width);
+            double blInset = Math.Min(BottomLeftInset, width);
             /*tlInset = Math.Min(TopLeftInset, minDimen - tl);
             trInset = Math.Min(TopRightInset, minDimen - tr);
             brInset = Math.Min(BottomRightInset, minDimen - br);
@@ -211,15 +207,16 @@ namespace ReCap.CommonUI
             bl = Math.Round(bl, 0);*/
 
             double strokeThickness = StrokeThickness;
+            /*
             bool hasStroke = strokeThickness > 0;
-            //double strokeHalf = hasStroke ? (strokeThickness / 2) : 0;
+            double strokeHalf = hasStroke ? (strokeThickness / 2) : 0;
+            */
             double borderBothSides = strokeThickness * 2;
 
             double fillWidth = width - borderBothSides;
             double fillHeight = height - borderBothSides;
 
             var rect = new Rect(strokeThickness, strokeThickness, fillWidth, fillHeight);
-            Thickness outsetTh = default(Thickness);
 
             var fillGeom = new StreamGeometry();
             using (var ctx = CreateGeometry(
@@ -245,7 +242,7 @@ namespace ReCap.CommonUI
 
                     InvertSide,
                     strokeThickness, false,
-                    out outsetTh)
+                    out Thickness outsetTh)
             )
             {
                 fillGeometry = fillGeom;

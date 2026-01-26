@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Media;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.Decorators
 {
     public partial class AngledBorderEx
         : AngledBorderBase

@@ -3,15 +3,15 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:rctr="using:ReCap.CommonUI">
 	<UserControl.Styles>
-		<Style Selector="rctr|GroupBox > StackPanel,
-						rctr|GroupBox > StackPanel > StackPanel">
+		<Style Selector="HeaderedContentControl > StackPanel,
+						HeaderedContentControl > StackPanel > StackPanel">
 			<Setter Property="Orientation" Value="Vertical" />
 			<Setter Property="Spacing" Value="20" />
 		</Style>
 	</UserControl.Styles>
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled">
 		<UniformGrid Columns="2">
-			<rctr:GroupBox Header="Normal">
+			<HeaderedContentControl Header="Normal">
 				<StackPanel>
 					<TextBox Watermark="Normal TextBox Watermark" />
 					<TextBox Watermark="Disabled TextBox Watermark"
@@ -28,11 +28,11 @@
 							Text="TextBox Text to clear"
 							Classes="clearButton" />
 				</StackPanel>
-			</rctr:GroupBox>
+			</HeaderedContentControl>
 
 
-			<rctr:GroupBox Header="Floating Watermark">
-				<rctr:GroupBox.Styles>
+			<HeaderedContentControl Header="Floating Watermark">
+				<HeaderedContentControl.Styles>
 					<Style Selector="TextBox">
 						<Setter Property="UseFloatingWatermark" Value="True" />
 					</Style>
@@ -42,7 +42,7 @@
 					<Style Selector="TextBox[IsEnabled=False]">
 						<Setter Property="Watermark" Value="Disabled Floating TextBox Watermark" />
 					</Style>
-				</rctr:GroupBox.Styles>
+				</HeaderedContentControl.Styles>
 				<StackPanel>
 					<TextBox />
 					<TextBox IsEnabled="False" />
@@ -59,17 +59,17 @@
 							Text="TextBox Text to clear"
 							Classes="clearButton" />
 				</StackPanel>
-			</rctr:GroupBox>
+			</HeaderedContentControl>
 
 
-			<rctr:GroupBox Header="Password-input">
-				<rctr:GroupBox.Styles>
+			<HeaderedContentControl Header="Password-input">
+				<HeaderedContentControl.Styles>
 					<Style Selector="TextBox">
 						<Setter Property="Watermark" Value="Type stuff here..." />
 						<Setter Property="TextInputOptions.ContentType" Value="Password" />
 						<Setter Property="PasswordChar" Value="*" />
 					</Style>
-				</rctr:GroupBox.Styles>
+				</HeaderedContentControl.Styles>
 				<StackPanel>
 					<TextBox />
 					<TextBox Watermark="Type stuff here... (alternate PasswordChar)"
@@ -77,18 +77,18 @@
 					<TextBox Watermark="TextBox with 'Reveal Password' button"
 							Classes="revealPasswordButton" />
 				</StackPanel>
-			</rctr:GroupBox>
+			</HeaderedContentControl>
 
 
-			<rctr:GroupBox Header="Password-input + Floating Watermark">
-				<rctr:GroupBox.Styles>
+			<HeaderedContentControl Header="Password-input + Floating Watermark">
+				<HeaderedContentControl.Styles>
 					<Style Selector="TextBox">
 						<Setter Property="UseFloatingWatermark" Value="True" />
 						<Setter Property="Watermark" Value="Type stuff here..." />
 						<Setter Property="TextInputOptions.ContentType" Value="Password" />
 						<Setter Property="PasswordChar" Value="*" />
 					</Style>
-				</rctr:GroupBox.Styles>
+				</HeaderedContentControl.Styles>
 				<StackPanel>
 					<TextBox />
 					<TextBox Watermark="Type stuff here... (alternate PasswordChar)"
@@ -96,7 +96,7 @@
 					<TextBox Watermark="TextBox with 'Reveal Password' button"
 							Classes="revealPasswordButton" />
 				</StackPanel>
-			</rctr:GroupBox>
+			</HeaderedContentControl>
 		</UniformGrid>
 	</ScrollViewer>
 </UserControl>

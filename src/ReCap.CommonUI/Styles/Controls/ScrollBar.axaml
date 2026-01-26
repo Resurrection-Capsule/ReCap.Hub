@@ -1,7 +1,5 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="clr-namespace:ReCap.CommonUI">
-    <rctr:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTheme x:Key="ReCapScrollBarThumbBase"
                 TargetType="{x:Type Thumb}">

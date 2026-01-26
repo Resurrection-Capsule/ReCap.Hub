@@ -12,8 +12,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Timers;
+using ReCap.CommonUI.Util;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls
 {
     /*public enum FlashingState
     {

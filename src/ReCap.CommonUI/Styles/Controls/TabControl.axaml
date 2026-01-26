@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="clr-namespace:ReCap.CommonUI">
+                    xmlns:rctr="using:ReCap.CommonUI.Controls"
+                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
     <ControlTheme x:Key="{x:Type TabControl}"
                     TargetType="TabControl">
         <Setter Property="Background" Value="Transparent" />
@@ -16,7 +17,7 @@
                     <DockPanel>
                         <Panel x:Name="HeaderArea"
                             DockPanel.Dock="{TemplateBinding TabStripPlacement}">
-                            <rctr:AngledBorderEx x:Name="HeaderBg"
+                            <rcdec:AngledBorderEx x:Name="HeaderBg"
                                                 Theme="{DynamicResource GroupBoxHeaderBackground}"
                                                 Opacity="0.6" />
                             <ItemsPresenter x:Name="PART_ItemsPresenter"
@@ -26,7 +27,7 @@
                         <Panel x:Name="HeaderArea"
                             DockPanel.Dock="{TemplateBinding TabStripPlacement}"
                             Margin="0,0,0,1">
-                            <rctr:AngledBorderEx x:Name="HeaderBg"
+                            <rcdec:AngledBorderEx x:Name="HeaderBg"
                                                 Theme="{DynamicResource GroupBoxHeaderBackground}"
 
                                                 TopLeftCut="14"
@@ -42,10 +43,10 @@
                         </Panel>
                         -->
                         <Panel>
-                            <rctr:AngledBorderEx x:Name="BodyBg"
+                            <rcdec:AngledBorderEx x:Name="BodyBg"
                                                 Theme="{DynamicResource GroupBoxBodyBackground}" />
                             <!--
-                            <rctr:AngledBorderEx Theme="{DynamicResource GroupBoxBodyBackground}"
+                            <rcdec:AngledBorderEx Theme="{DynamicResource GroupBoxBodyBackground}"
                                                 TopLeftInset="18"
                                                 TopRightInset="18" />
                             -->
@@ -77,7 +78,7 @@
                 <Setter Property="Margin" Value="24,2,24,0" />
             </Style>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#HeaderBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#HeaderBg">
                 <Setter Property="InvertSide" Value="Bottom" />
                 <Setter Property="Margin" Value="0,0,0,-4" />
 
@@ -94,7 +95,7 @@
                 <Setter Property="BottomRightCut" Value="5" />
             </Style>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#BodyBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#BodyBg">
                 <Setter Property="TopLeftInset" Value="18" />
                 <Setter Property="TopRightInset" Value="18" />
 
@@ -114,7 +115,7 @@
                 <Setter Property="Margin" Value="24,0,24,2" />
             </Style>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#HeaderBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#HeaderBg">
                 <Setter Property="InvertSide" Value="Top" />
                 <Setter Property="Margin" Value="0,-4,0,0" />
 
@@ -131,7 +132,7 @@
                 <Setter Property="TopRightCut" Value="5" />
             </Style>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#BodyBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#BodyBg">
                 <Setter Property="TopLeftInset" Value="0" />
                 <Setter Property="TopRightInset" Value="0" />
 
@@ -151,7 +152,7 @@
                 <Setter Property="Margin" Value="2,24,0,24" />
             </Style>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#HeaderBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#HeaderBg">
                 <Setter Property="InvertSide" Value="Right" />
                 <Setter Property="Margin" Value="0,0,-4,0" />
 
@@ -162,7 +163,7 @@
             </Style>
 
             <!--
-            <Style Selector="^ /template/ rctr|AngledBorderEx#BodyBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#BodyBg">
                 <Setter Property="TopRightCut" Value="14" />
                 <Setter Property="BottomRightCut" Value="14" />
             </Style>
@@ -180,7 +181,7 @@
                 <Setter Property="Margin" Value="0,24,2,24" />
             </Style>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#HeaderBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#HeaderBg">
                 <Setter Property="InvertSide" Value="Left" />
                 <Setter Property="Margin" Value="-4,0,0,0" />
 
@@ -191,7 +192,7 @@
             </Style>
 
             <!--
-            <Style Selector="^ /template/ rctr|AngledBorderEx#BodyBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#BodyBg">
                 <Setter Property="TopLeftCut" Value="14" />
                 <Setter Property="BottomLeftCut" Value="14" />
             </Style>
@@ -215,7 +216,7 @@
                 </ItemsPanelTemplate>
             </Setter>
 
-            <Style Selector="^ /template/ rctr|AngledBorderEx#HeaderBg, ^ /template/ rctr|AngledBorderEx#BodyBg">
+            <Style Selector="^ /template/ rcdec|AngledBorderEx#HeaderBg, ^ /template/ rcdec|AngledBorderEx#BodyBg">
                 <Setter Property="TopLeftInset" Value="0" />
                 <Setter Property="BottomLeftInset" Value="0" />
                 <Setter Property="BottomRightInset" Value="0" />

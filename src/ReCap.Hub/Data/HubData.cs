@@ -85,7 +85,7 @@ namespace ReCap.Hub.Data
         }
 
         const string _USE_MANAGED_DECORATIONS_EL = "useManagedWindowDecorations";
-        bool _useManagedDecorations = CommonUI.OSInfo.IsWindows;
+        bool _useManagedDecorations = CommonUI.Util.OSInfo.IsWindows;
         bool _useManagedDecorationsSet = false;
         public bool UseManagedDecorations
         {

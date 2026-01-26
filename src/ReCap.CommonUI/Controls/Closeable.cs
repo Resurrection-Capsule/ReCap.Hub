@@ -7,7 +7,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls
 {
     [TemplatePart(_PART_CloseButton, typeof(Button))]
     public partial class Closeable
@@ -98,6 +98,10 @@ namespace ReCap.CommonUI
                 , coerce: CoerceIsExpanded
                 */
             );
+        /// <summary>
+        /// Gets or sets whether or not to show the built-in close button
+        /// on the <see cref="Closeable"/>, when open.
+        /// </summary>
         public bool IsCloseButtonVisible
         {
             get => GetValue(IsCloseButtonVisibleProperty);

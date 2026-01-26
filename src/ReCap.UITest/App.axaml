@@ -1,7 +1,8 @@
 <Application x:Class="ReCap.UITest.App"
             xmlns="https://github.com/avaloniaui"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:rctr="using:ReCap.CommonUI"
+            xmlns:rc="using:ReCap.CommonUI"
+            xmlns:rctr="using:ReCap.CommonUI.Controls"
             xmlns:hub="using:ReCap.Hub"
             xmlns:hubv="using:ReCap.Hub.Views"
             RequestedThemeVariant="Dark">
@@ -9,6 +10,10 @@
         <hubv:ViewLocator />
     </Application.DataTemplates>
     <Application.Styles>
-        <rctr:ReCapTheme />
+        <rc:ReCapTheme />
+
+        <Style Selector="HeaderedContentControl">
+            <Setter Property="Theme" Value="{DynamicResource GroupBox}" />
+        </Style>
     </Application.Styles>
 </Application>

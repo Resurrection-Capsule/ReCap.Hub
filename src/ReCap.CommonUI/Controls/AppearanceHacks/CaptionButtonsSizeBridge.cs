@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Controls.AppearanceHacks
 {
     public partial class CaptionButtonsSizeBridge
         : Panel

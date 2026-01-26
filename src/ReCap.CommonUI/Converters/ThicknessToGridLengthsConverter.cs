@@ -1,14 +1,13 @@
-﻿using Avalonia;
+﻿using System;
+using System.Globalization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Converters
 {
-    public abstract class GridHelper : AvaloniaObject
+    public abstract class GridHelper
+        : AvaloniaObject
     {
         public static readonly AttachedProperty<ColumnDefinitions> BindColumnsProperty =
             AvaloniaProperty.RegisterAttached<GridHelper, Grid, ColumnDefinitions>("BindColumns");
@@ -38,7 +37,12 @@ namespace ReCap.CommonUI
         }
     }
 
-    public abstract class ThicknessToAxisDefinitionsConverterBase<TDef, TDefsList> : IValueConverter where TDef : DefinitionBase where TDefsList : DefinitionList<TDef>
+    public abstract class ThicknessToAxisDefinitionsConverterBase<TDef, TDefsList>
+        : IValueConverter
+        where TDef
+            : DefinitionBase
+        where TDefsList
+            : DefinitionList<TDef>
     {
         public abstract TDefsList GetDefinitions(double near, double far);
         public abstract (double near, double far) GetRelevantSides(Thickness value);
@@ -56,12 +60,11 @@ namespace ReCap.CommonUI
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotSupportedException();
     }
 
-    public class ThicknessToColumnDefinitionsConverter : ThicknessToAxisDefinitionsConverterBase<ColumnDefinition, ColumnDefinitions>
+    public class ThicknessToColumnDefinitionsConverter
+        : ThicknessToAxisDefinitionsConverterBase<ColumnDefinition, ColumnDefinitions>
     {
         public override ColumnDefinitions GetDefinitions(double near, double far)
             => ColumnDefinitions.Parse($"{near},*,{far}");
@@ -69,7 +72,8 @@ namespace ReCap.CommonUI
             => (value.Left, value.Right);
     }
 
-    public class ThicknessToRowDefinitionsConverter : ThicknessToAxisDefinitionsConverterBase<RowDefinition, RowDefinitions>
+    public class ThicknessToRowDefinitionsConverter
+        : ThicknessToAxisDefinitionsConverterBase<RowDefinition, RowDefinitions>
     {
         public override RowDefinitions GetDefinitions(double near, double far)
             => RowDefinitions.Parse($"{near},*,{far}");

@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="ReCap.UITest.Views.Pages.CloseableView"
             xmlns="https://github.com/avaloniaui"
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			xmlns:rctr="using:ReCap.CommonUI">
+			xmlns:rctr="using:ReCap.CommonUI.Controls">
 	<UserControl.Styles>
 		<Style Selector="rctr|Closeable">
 			<Setter Property="IsCloseButtonVisible" Value="{Binding ShowCloseButton}" />

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using Avalonia;
 using Avalonia.Controls;
+using ReCap.CommonUI.Util;
 
 namespace ReCap.CommonUI
 {

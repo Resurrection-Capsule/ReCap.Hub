@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using Avalonia.Data.Converters;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Converters
 {
     public class AddAllConverter
         : IMultiValueConverter
     {
-        public static readonly AddAllConverter Instance = new AddAllConverter();
+        public static readonly AddAllConverter Instance = new();
         private AddAllConverter()
         {}
 

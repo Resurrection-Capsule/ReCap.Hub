@@ -1,12 +1,11 @@
-﻿using Avalonia.Data.Converters;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Text;
+using Avalonia.Data.Converters;
 
-namespace ReCap.CommonUI
+namespace ReCap.CommonUI.Converters
 {
-    public class CompareToConverter : IValueConverter
+    public class CompareToConverter
+        : IValueConverter
     {
         bool _trueIfMatch = true;
         public bool TrueIfMatch
@@ -32,8 +31,6 @@ namespace ReCap.CommonUI
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotSupportedException();
     }
 }

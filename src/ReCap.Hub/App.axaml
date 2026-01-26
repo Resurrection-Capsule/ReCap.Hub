@@ -15,5 +15,9 @@
         <Style Selector=":is(Window)">
             <Setter Property="ExtendClientAreaToDecorationsHint" Value="{Binding Path=UseManagedDecorations, Source={x:Static dt:HubData.Instance}, Mode=OneWay}" />
         </Style>
+
+            <Style Selector="HeaderedContentControl">
+                <Setter Property="Theme" Value="{DynamicResource GroupBox}" />
+            </Style>
     </Application.Styles>
 </Application>
