@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:rctr="using:ReCap.CommonUI"
+        xmlns:rctr="clr-namespace:ReCap.CommonUI;assembly=ReCap.CommonUI"
         xmlns:sys="using:System">
 	<FontWeight x:Key="ComboBoxHeaderThemeFontWeight">Normal</FontWeight>
 	<FontWeight x:Key="SliderHeaderThemeFontWeight">Normal</FontWeight>

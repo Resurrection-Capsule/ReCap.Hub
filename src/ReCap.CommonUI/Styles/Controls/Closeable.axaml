@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="using:ReCap.CommonUI.Controls"
-                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
-                    xmlns:rceas="using:ReCap.CommonUI.Easings"
+                    xmlns:rctr="clr-namespace:ReCap.CommonUI.Controls;assembly=ReCap.CommonUI"
+                    xmlns:rcdec="clr-namespace:ReCap.CommonUI.Controls.Decorators;assembly=ReCap.CommonUI"
+                    xmlns:rceas="clr-namespace:ReCap.CommonUI.Easings;assembly=ReCap.CommonUI"
                     xmlns:sys="using:System">
     <sys:TimeSpan x:Key="Closeable.AnimationDuration">0:0:0.375</sys:TimeSpan>
 

@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rctr="using:ReCap.CommonUI.Controls"
-                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
+                    xmlns:rctr="clr-namespace:ReCap.CommonUI.Controls;assembly=ReCap.CommonUI"
+                    xmlns:rcdec="clr-namespace:ReCap.CommonUI.Controls.Decorators;assembly=ReCap.CommonUI"
                     x:CompileBindings="True">
     <ControlTheme x:Key="GroupBoxHeaderBackground"
                 TargetType="{x:Type rcdec:AngledBorderEx}">

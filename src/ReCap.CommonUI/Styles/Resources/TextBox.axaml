@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="using:ReCap.CommonUI"
-        xmlns:rctr="using:ReCap.CommonUI"
+        xmlns:local="clr-namespace:ReCap.CommonUI;assembly=ReCap.CommonUI"
+        xmlns:rctr="clr-namespace:ReCap.CommonUI;assembly=ReCap.CommonUI"
         xmlns:sys="using:System">
 	<Thickness x:Key="TextBoxTopHeaderMargin">0,0,0,4</Thickness>
 	<StreamGeometry x:Key="TextBoxClearButtonData">M 11.416016,10 20,1.4160156 18.583984,0 10,8.5839846 1.4160156,0 0,1.4160156 8.5839844,10 0,18.583985 1.4160156,20 10,11.416015 18.583984,20 20,18.583985 Z</StreamGeometry>

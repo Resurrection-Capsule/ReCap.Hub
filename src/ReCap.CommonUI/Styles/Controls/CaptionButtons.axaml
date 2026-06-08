@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="using:ReCap.CommonUI"
-        xmlns:rccnv="using:ReCap.CommonUI.Converters"
-        xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators"
-        xmlns:rchax="using:ReCap.CommonUI.Controls.AppearanceHacks">
+        xmlns:local="clr-namespace:ReCap.CommonUI;assembly=ReCap.CommonUI"
+        xmlns:rccnv="clr-namespace:ReCap.CommonUI.Converters;assembly=ReCap.CommonUI"
+        xmlns:rcdec="clr-namespace:ReCap.CommonUI.Controls.Decorators;assembly=ReCap.CommonUI"
+        xmlns:rchax="clr-namespace:ReCap.CommonUI.Controls.AppearanceHacks;assembly=ReCap.CommonUI">
 	<PathGeometry x:Key="CloseButtonGlyphGeometry">
 		M 0 0 L 3 0 L 5 2 L 7 0 L 10 0
 		L 10 0.5 L 7 4.5 L 10 8.5 L 10 9
