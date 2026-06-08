@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
+        xmlns:rcdec="clr-namespace:ReCap.CommonUI.Controls.Decorators;assembly=ReCap.CommonUI">
 	<rcdec:SlicedImage x:Key="TopTabs.TabRow"
 					Source="avares://ReCap.CommonUI/Res/UI/TopTabs/TabRow.png"
 					BorderThickness="22,9,22,6" />

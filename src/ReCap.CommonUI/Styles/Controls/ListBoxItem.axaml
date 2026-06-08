@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
+                    xmlns:rcdec="clr-namespace:ReCap.CommonUI.Controls.Decorators;assembly=ReCap.CommonUI">
 	<ControlTheme x:Key="{x:Type ListBoxItem}"
 				TargetType="{x:Type ListBoxItem}">
 		<Setter Property="Background" Value="{DynamicResource ListBoxItem.Background.Idle}" />

@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
         			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:rccnv="using:ReCap.CommonUI.Converters"
+					xmlns:rccnv="clr-namespace:ReCap.CommonUI.Converters;assembly=ReCap.CommonUI"
 					xmlns:sys="using:System">
 	<PathGeometry x:Key="HexagonGeometry" Figures="M 21.5 0 L 43 12.413 L 43 37.587 L 21.5 50 L 0 37.587 L 0 12.413 Z" />
 

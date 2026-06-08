@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="using:ReCap.CommonUI"
-        xmlns:rcdec="using:ReCap.CommonUI.Controls.Decorators">
+        xmlns:local="clr-namespace:ReCap.CommonUI;assembly=ReCap.CommonUI"
+        xmlns:rcdec="clr-namespace:ReCap.CommonUI.Controls.Decorators;assembly=ReCap.CommonUI">
     <Style Selector=":is(ContentControl).pane">
         <Setter Property="Padding" Value="4,8"/>
         
