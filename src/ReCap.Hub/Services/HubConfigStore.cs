@@ -68,7 +68,7 @@ namespace ReCap.Hub.Services
             _fs.Move(tempPath, _cfgPath, overwrite: true); // atomic replace
         }
 
-        XDocument Serialize(HubConfig config)
+        static XDocument Serialize(HubConfig config)
         {
             var gameConfigsEl = new XElement(GAME_CONFIGS_EL);
             foreach (var install in config.GameInstalls)

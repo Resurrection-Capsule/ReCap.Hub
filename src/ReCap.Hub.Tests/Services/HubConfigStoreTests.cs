@@ -85,6 +85,37 @@ namespace ReCap.Hub.Tests.Services
         }
 
         [Fact]
+        public void SaveThenLoad_NullWineFields_RoundTripAsNull()
+        {
+            // The common Windows case: no Wine prefix/executable. They must survive as null
+            // (the attributes are omitted on write and read back absent => null).
+            var fs = new FakeFileSystem();
+            var store = NewStore(fs);
+            var cfg = new HubConfig
+            {
+                GameInstalls = new[]
+                {
+                    new GameInstall
+                    {
+                        GameInstallPath = "C:/Games/Darkspore",
+                        SavesPath = "C:/saves",
+                        WinePrefix = null,
+                        WineExecutable = null,
+                        DisplayName = "Win Install",
+                    },
+                },
+            };
+
+            store.Save(cfg);
+            var loaded = store.Load();
+
+            var install = Assert.Single(loaded.GameInstalls);
+            Assert.Null(install.WinePrefix);
+            Assert.Null(install.WineExecutable);
+            Assert.Equal("C:/Games/Darkspore", install.GameInstallPath);
+        }
+
+        [Fact]
         public void Save_IsAtomic_WritesViaTempThenMove_NoTempLeftBehind()
         {
             var fs = new FakeFileSystem();
@@ -118,8 +149,8 @@ namespace ReCap.Hub.Tests.Services
             NewStore(fs).Save(SampleConfig());
             string good = fs.Files[CfgPath];
 
-            // Now make any temp write fail and attempt a different save.
-            fs.FailWriteWhen = path => path != CfgPath; // temp path differs from target
+            // Now make the temp write fail and attempt a different save.
+            fs.FailWriteWhen = path => path == CfgPath + ".tmp";
             var failing = NewStore(fs);
 
             Assert.ThrowsAny<System.Exception>(() =>
