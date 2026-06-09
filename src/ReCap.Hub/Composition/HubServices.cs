@@ -24,6 +24,13 @@ namespace ReCap.Hub.Composition
         public static void Register(IServiceCollection services)
         {
             services.AddSingleton<IFileSystem, FileSystem>();
+            services.AddSingleton<ReCap.Hub.Services.IHubConfigStore>(sp =>
+            {
+                var fs = sp.GetRequiredService<IFileSystem>();
+                var dir = ReCap.Hub.Data.HubGlobalPaths.CfgPath;
+                var path = System.IO.Path.Combine(dir, "config.xml");
+                return new ReCap.Hub.Services.HubConfigStore(fs, dir, path);
+            });
         }
 
         public static T Get<T>() where T : notnull
