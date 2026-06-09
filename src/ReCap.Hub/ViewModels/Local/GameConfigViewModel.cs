@@ -5,9 +5,13 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using ReactiveUI;
 using ReCap.Hub.Data;
 
 namespace ReCap.Hub.ViewModels
@@ -20,6 +24,11 @@ namespace ReCap.Hub.ViewModels
             get => _title;
             set => RASIC(ref _title, value);
         }
+
+        public ReactiveCommand<SaveGameViewModel, Unit> PlayGameWithSaveCommand { get; }
+        public ReactiveCommand<Unit, Unit> NewSaveGameCommand { get; }
+        public ReactiveCommand<SaveGameViewModel, Unit> DeleteSaveGameCommand { get; }
+        public ReactiveCommand<SaveGameViewModel, Unit> RenameSaveGameCommand { get; }
 
         double _lastLaunchTime = -1;
         public double LastLaunchTime
@@ -145,6 +154,18 @@ namespace ReCap.Hub.ViewModels
                 
             }*/
             EnsureServerExitedHandler(LocalServer.Instance);
+
+            PlayGameWithSaveCommand = ReactiveCommand.CreateFromTask<SaveGameViewModel>(PlayGameWithSave);
+            NewSaveGameCommand = ReactiveCommand.CreateFromTask(async () => { await CreateSaveGame(true); });
+            DeleteSaveGameCommand = ReactiveCommand.CreateFromTask<SaveGameViewModel>(DeleteSaveGame);
+            RenameSaveGameCommand = ReactiveCommand.CreateFromTask<SaveGameViewModel>(RenameSaveGame);
+
+            Observable.Merge(
+                    PlayGameWithSaveCommand.ThrownExceptions,
+                    NewSaveGameCommand.ThrownExceptions,
+                    DeleteSaveGameCommand.ThrownExceptions,
+                    RenameSaveGameCommand.ThrownExceptions)
+                .Subscribe(ex => Debug.WriteLine($"Command failed: {ex}"));
         }
 
         /*private void LocalServer_InstanceCreated(object sender, EventArgs e)
@@ -163,24 +184,6 @@ namespace ReCap.Hub.ViewModels
             };
         }
 
-        public async void NewSaveGameCommand(object parameter)
-        {
-            var task = CreateSaveGame(true);
-            await task;
-            if (task.IsFaulted || (task.Exception != null))
-                throw task.Exception;
-        }
-
-        public async void DeleteSaveGameCommand(object parameter)
-        {
-            if (!(parameter is SaveGameViewModel deletThis))
-                return;
-                
-            var task = DeleteSaveGame(deletThis);
-            await task;
-            if (task.IsFaulted || (task.Exception != null))
-                throw task.Exception;
-        }
         public async Task DeleteSaveGame(SaveGameViewModel saveGame)
         {
             if (!Saves.Contains(saveGame))
@@ -194,19 +197,6 @@ namespace ReCap.Hub.ViewModels
             }
         }
 
-        public async void RenameSaveGameCommand(object parameter)
-        {
-            Debug.WriteLine(nameof(RenameSaveGameCommand));
-            Console.WriteLine(nameof(RenameSaveGameCommand));
-            if (!(parameter is SaveGameViewModel ren))
-                return;
-            
-            
-            var task = RenameSaveGame(ren);
-            await task;
-            if (task.IsFaulted || (task.Exception != null))
-                throw task.Exception;
-        }
         public async Task RenameSaveGame(SaveGameViewModel saveGame)
         {
             if (!Saves.Contains(saveGame))
@@ -233,18 +223,6 @@ namespace ReCap.Hub.ViewModels
             return saveGame;
         }
 
-        public async void PlayGameWithSaveCommand(object parameter)
-        {
-            if (!(parameter is SaveGameViewModel save))
-                return;
-                
-            var task = PlayGameWithSave(save);
-            await task;
-            if (task.IsFaulted || (task.Exception != null))
-                throw task.Exception;
-        }
-
-        static IDisposable _lastServerInstance = null;
         public async Task PlayGameWithSave(SaveGameViewModel save)
         {
             double now = DateTime.UtcNow.ToUniversalTime().Subtract(DateTime.UnixEpoch.ToUniversalTime()).TotalMilliseconds;
@@ -310,85 +288,25 @@ namespace ReCap.Hub.ViewModels
             bool autoLoginPackageMissing = !File.Exists(autoLoginPackageDestPath);
 
             string gameOriginalExePath = Path.Combine(gameBinPath, "Darkspore.exe");
-            if (exeMissing || autoLoginPackageMissing)
-            {
-                Patcher.PatchGame(exeMissing, gameOriginalExePath, gameExePath, autoLoginPackageMissing, autoLoginPackageDestPath);
 
-                /*await LocalServer.Instance.RunPatcher(
-                    exeMissing ? gameOriginalExePath : null
-                    , exeMissing ? gameExePath : null
-                    , autoLoginPackageMissing ? gameDataPath : null
-                );*/
-            }
-
-
-            //Process.GetCurrentProcess().Kill();
             save.UpdateUserDisplayName(HubData.Instance.UserDisplayName);
 
-            _lastServerInstance?.Dispose();
-            _lastServerInstance = LocalServer.Instance.Start(WinePrefixPath, WineExecPath);
-            
+            var session = Composition.HubServices.Get<Services.IGameSession>();
+            var result = await session.PlayAsync(new Services.GameSessionRequest
             {
-                var fail = await GameLaunchService.LaunchGame(WinePrefixPath, WineExecPath, gameExePath, gameBinPath);
-                if (fail != null)
-                {
-                    //TODO: Do something useful here
-                }
-
-                /*Process[] darksporeProcesses = new Process[]
-                {
-                    darksporeProcess
-                };
-                bool started = false;*/
-                /*await Task.Run(() =>
-                {* /
-                    /*do
-                    {
-                        if (!started)
-                        {
-                            darksporeProcess.Start();
-                            Debug.WriteLine($"DARKSPORE ORIGINAL PROCESS NAME: {darksporeProcess.ProcessName}");
-                            started = true;
-                        }
-                        while (!darksporeProcesses.All(x => x.HasExited))
-                        //darksporeProcess.WaitForExit();
-                        /*if (darksporeExit.IsFaulted || (darksporeExit.Exception != null))
-                            throw darksporeExit.Exception;
-                        else* /
-                        {
-                            darksporeProcesses = Process.GetProcesses().Where(x =>
-                            {
-                                try
-                                {
-                                    return LocateDarksporeViewModel.IsProcessDarkspore(x.GetExecutablePath());
-                                }
-                                catch
-                                {
-                                    return false;
-                                }
-                            }).ToArray(); //.GetProcessesByName(patchedExeName);
-                            if (darksporeProcesses.Length <= 0)
-                            {
-                                Debug.WriteLine("DARKSPORE EXITED");
-                                //darksporeExit = null;
-                                darksporeProcesses = null;
-                                break;
-                            }
-                            else
-                            {
-                                //darksporeExit = Task.WhenAll(darksporeProcesses.ToList().ConvertAll<Task>(x => x.WaitForExitAsync()).ToArray());
-                            }
-                        }
-                    }
-                    while ((darksporeProcesses != null) && (darksporeProcesses.Length > 0)); //((darksporeExit == null) || (!darksporeExit.IsCompleted));
-                //});
-                */
-
-            }
-            if (HubData.Instance.AutoCloseServer)
+                GameExePath = gameExePath,
+                GameOriginalExePath = gameOriginalExePath,
+                GameBinDir = gameBinPath,
+                AutoLoginPackageDestPath = autoLoginPackageDestPath,
+                WinePrefix = WinePrefixPath,
+                WineExecutable = WineExecPath,
+                ExeMissing = exeMissing,
+                AutoLoginPackageMissing = autoLoginPackageMissing,
+                AutoCloseServer = HubData.Instance.AutoCloseServer,
+            }, CancellationToken.None);
+            if (!result.Success)
             {
-                _lastServerInstance?.Dispose();
-                _lastServerInstance = null;
+                //TODO (Step 2b): surface result.Error to the user
             }
             Process.GetCurrentProcess().Kill(); //HACK
             save.ReadFromXml(true);
