@@ -66,6 +66,19 @@ namespace ReCap.Hub.Tests.Services
         }
 
         [Fact]
+        public async Task PlayAsync_PatchThrows_DoesNotStartServer_AndPropagates()
+        {
+            var (s, log, p, srv, _) = New();
+            p.Throw = new System.IO.IOException("patch failed");
+
+            await Assert.ThrowsAsync<System.IO.IOException>(
+                () => s.PlayAsync(Req(autoClose: true), CancellationToken.None));
+
+            Assert.Empty(srv.Handles);                              // server never started
+            Assert.Equal(new[] { "patch" }, log.Events.ToArray());  // nothing after patch
+        }
+
+        [Fact]
         public async Task PlayAsync_LaunchFails_ReturnsFailure_ButStillStopsServerWhenAutoClose()
         {
             var (s, log, _, srv, l) = New();

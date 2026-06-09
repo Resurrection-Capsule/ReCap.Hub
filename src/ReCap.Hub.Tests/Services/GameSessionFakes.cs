@@ -12,12 +12,15 @@ namespace ReCap.Hub.Tests.Services
     {
         readonly CallLog _log;
         public int Result = 0;
+        public Exception? Throw;
         public int Calls;
         public FakePatcher(CallLog log) => _log = log;
         public int PatchGame(bool exeMissing, string exeSrcPath, string exeDestPath,
                              bool pkgMissing, string pkgDestPath)
         {
-            Calls++; _log.Events.Add("patch"); return Result;
+            Calls++; _log.Events.Add("patch");
+            if (Throw != null) throw Throw;
+            return Result;
         }
     }
 
@@ -46,7 +49,7 @@ namespace ReCap.Hub.Tests.Services
     public sealed class FakeGameLauncher : IGameLauncher
     {
         readonly CallLog _log;
-        public Exception Result;            // null = clean exit
+        public Exception? Result;            // null = clean exit
         public int Calls;
         public FakeGameLauncher(CallLog log) => _log = log;
         public Task<Exception> LaunchGame(string winePrefix, string wineExecutable, string gameExecutable,
