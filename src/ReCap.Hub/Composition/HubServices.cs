@@ -31,6 +31,10 @@ namespace ReCap.Hub.Composition
                 var path = System.IO.Path.Combine(dir, "config.xml");
                 return new ReCap.Hub.Services.HubConfigStore(fs, dir, path);
             });
+            services.AddSingleton<ReCap.Hub.Services.IPatcher, ReCap.Hub.Services.PatcherAdapter>();
+            services.AddSingleton<ReCap.Hub.Services.ILocalServer, ReCap.Hub.Services.LocalServerAdapter>();
+            services.AddSingleton<ReCap.Hub.Services.IGameLauncher, ReCap.Hub.Services.GameLauncherAdapter>();
+            services.AddSingleton<ReCap.Hub.Services.IGameSession, ReCap.Hub.Services.GameSession>();
         }
 
         public static T Get<T>() where T : notnull
