@@ -43,14 +43,15 @@ namespace ReCap.Hub.Services
             if (!_fs.FileExists(_cfgPath))
                 return HubConfig.Default;
 
+            string rawText = _fs.ReadAllText(_cfgPath);
             XDocument doc;
             try
             {
-                doc = XDocument.Parse(_fs.ReadAllText(_cfgPath));
+                doc = XDocument.Parse(rawText);
             }
             catch (System.Xml.XmlException)
             {
-                BackUpCorruptFile();
+                BackUpCorruptFile(rawText);
                 return HubConfig.Default;
             }
 
@@ -155,11 +156,11 @@ namespace ReCap.Hub.Services
         static double ParseDouble(string s)
             => double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var v) ? v : -1;
 
-        void BackUpCorruptFile()
+        void BackUpCorruptFile(string content)
         {
             try
             {
-                _fs.WriteAllText(_cfgPath + ".corrupt.bak", _fs.ReadAllText(_cfgPath));
+                _fs.WriteAllText(_cfgPath + ".corrupt.bak", content);
             }
             catch
             {
