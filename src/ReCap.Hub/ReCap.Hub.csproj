@@ -54,6 +54,7 @@
 		<PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
         <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="$(AvVer)" />
 		<PackageReference Include="PeNet" Version="4.0.5" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
 	</ItemGroup>
 
 
