@@ -18,11 +18,13 @@
             <DockPanel LastChildFill="{Binding IsCloseable, Mode=OneWay}">
                 <Button Content="Cancel"
                         Classes="left"
+                        Command="{Binding Cancel}"
                         DockPanel.Dock="Left"
                         IsVisible="{Binding IsCloseable, Mode=OneWay}" />
 
                 <Button x:Name="AcceptButton"
                         Content="{DynamicResource {x:Static keys:Globals.Accept}}"
+                        Command="{Binding Accept}"
                         DockPanel.Dock="Right"
                         Classes.hasGamePath="{Binding HasGamePath, Mode=OneWay}"
                         Classes.browseForGamePath="{Binding BrowseForGamePath, Mode=OneWay}" />

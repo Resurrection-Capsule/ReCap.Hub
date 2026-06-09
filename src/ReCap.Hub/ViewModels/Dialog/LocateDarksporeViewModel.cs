@@ -330,6 +330,29 @@ namespace ReCap.Hub.ViewModels
             => TrySetResult(null, null, null);
 
         public void Accept(object parameter = null)
-            => TrySetResult(_winePrefix, _wineExecutable, GamePath);
+        {
+            // Manual "browse" flow: the user typed/picked the game .exe into GamePathFromBrowseDialog,
+            // but GamePath (the install root) is only set by the detect-by-launch timer. Resolve the
+            // install root from the exe the same way detection does (two levels up: <root>\DarksporeBin\Darkspore.exe).
+            if (BrowseForGamePath)
+            {
+                string exePath = GamePathFromBrowseDialog;
+                if (string.IsNullOrWhiteSpace(exePath) || !File.Exists(exePath) || !IsProcessDarkspore(exePath))
+                    return;
+
+                GamePath = Path.GetDirectoryName(Path.GetDirectoryName(exePath));
+
+                if (ShowWineBrowseControls)
+                {
+                    _winePrefix = WinePrefixFromBrowseDialog;
+                    _wineExecutable = WineExecutableFromBrowseDialog;
+                }
+            }
+
+            if (!HasGamePath)
+                return;
+
+            TrySetResult(_winePrefix, _wineExecutable, GamePath);
+        }
     }
 }
