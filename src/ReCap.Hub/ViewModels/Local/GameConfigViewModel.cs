@@ -306,9 +306,17 @@ namespace ReCap.Hub.ViewModels
             }, CancellationToken.None);
             if (!result.Success)
             {
-                //TODO (Step 2b): surface result.Error to the user
+                string message = result.Error?.Message ?? "The game failed to launch.";
+                await DialogDisplay.ShowDialog(new OkDialogViewModel("Launch failed", message, true));
+                return; // Hub stays alive so the user can see the error — no kill on failure.
             }
-            Process.GetCurrentProcess().Kill(); //HACK
+
+            Process.GetCurrentProcess().Kill(); //HACK  (success path unchanged; removed in full Step 2b)
+            ApplyPostGameSessionState(save, now);
+        }
+
+        private void ApplyPostGameSessionState(SaveGameViewModel save, double now)
+        {
             save.ReadFromXml(true);
             HubData.Instance.GameConfigs.Remove(this);
             HubData.Instance.GameConfigs.Insert(0, this);
@@ -316,8 +324,6 @@ namespace ReCap.Hub.ViewModels
             _lastLaunchTime = now;
             save.LastLaunchTime = now;
             //save.ReadFromXml()
-
-
 
             Saves.Remove(save);
             Saves.Insert(0, save);
