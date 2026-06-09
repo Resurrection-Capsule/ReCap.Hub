@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using ReCap.Hub.Infrastructure;
@@ -10,7 +11,7 @@ namespace ReCap.Hub.Composition
     /// </summary>
     public static class HubServices
     {
-        public static IServiceProvider Provider { get; private set; }
+        public static IServiceProvider? Provider { get; private set; }
 
         public static IServiceProvider Build()
         {
