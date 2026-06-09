@@ -76,7 +76,7 @@ namespace ReCap.Hub.Data
 
         public static int PatchGame(bool exeMissing, string exeSrcPath, string exeDestPath, bool autoLoginPackageMissing, string autoLoginPackageDestPath)
         {
-            string autoLoginPackageSrcPath = Path.Combine(HubData.Instance.CfgPath, AUTO_LOGIN_PACKAGE_NAME);
+            string autoLoginPackageSrcPath = Path.Combine(HubGlobalPaths.CfgPath, AUTO_LOGIN_PACKAGE_NAME);
             Dictionary<string, string> autoLoginPackageDict = null;
             if (autoLoginPackageMissing)
             {

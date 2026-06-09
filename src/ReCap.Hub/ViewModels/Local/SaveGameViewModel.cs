@@ -147,12 +147,8 @@ namespace ReCap.Hub.ViewModels
             return saveGame;*/
         }
 
-        public void WriteToXml(ref XElement el)
-        {
-            //Save();
-            el.SetAttributeValue("id", Title);
-            el.SetAttributeValue("lastLaunchTime", LastLaunchTime);
-        }
+        public ReCap.Hub.Domain.SaveRef ToSaveRef()
+            => new ReCap.Hub.Domain.SaveRef { Id = Title, LastLaunchTime = LastLaunchTime };
         public void Save()
         {
             Model.SaveToXml();

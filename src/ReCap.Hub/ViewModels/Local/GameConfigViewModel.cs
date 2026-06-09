@@ -110,52 +110,28 @@ namespace ReCap.Hub.ViewModels
             SavesPath = HubGlobalPaths.ServerAccountsDir; //savesPath;
         }
 
-        public GameConfigViewModel(string gameInstallPath, string wineExecutable, string winePrefix, ref XElement element) //, string savesPath)
-            : this(gameInstallPath, wineExecutable, winePrefix)
+        public GameConfigViewModel(ReCap.Hub.Domain.GameInstall install)
+            : this(install.GameInstallPath, install.WineExecutable, install.WinePrefix)
         {
-            if (element.TryGetAttributeValue("displayName", out string displayName))
-                Title = displayName;
+            Title = install.DisplayName ?? string.Empty;
 
             if (Directory.Exists(SavesPath))
             {
-                string savesPath = SavesPath;
-                List<string> filePaths = Directory.EnumerateFiles(SavesPath)
-                    //.Where(x => !Path.GetFileName(x).Equals("placekeeper", StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-                foreach (var el in element.Elements())
+                foreach (var saveRef in install.Saves)
                 {
-                    if (!el.TryGetAttributeValue("id", out string saveFileName))
+                    if (string.IsNullOrEmpty(saveRef.Id))
                         continue;
-                    string saveXmlPath = Path.Combine(savesPath, saveFileName + ".xml");
+                    string saveXmlPath = Path.Combine(SavesPath, saveRef.Id + ".xml");
                     if (!File.Exists(saveXmlPath))
                         continue;
-                    
                     Saves.Add(new SaveGameViewModel(saveXmlPath));
                 }
-                /*foreach (string f in filePaths)
-                {
-                    if (Path.GetFileName(f).Equals("placekeeper", StringComparison.OrdinalIgnoreCase))
-                    {
-                        File.Delete(f);
-                        continue;
-                    }
-
-                    try
-                    {
-                        var save = new SaveGameViewModel(f);
-                        Saves.Add(save);
-                    }
-                    catch (XmlException ex)
-                    { }
-                }*/
             }
-        
-
 
             if (TimeHelper.TryGetNewest(Saves, s => s.LastLaunchTime, out SaveGameViewModel lastPlayed))
                 SelectedSave = lastPlayed;
         }
-            
+
         private GameConfigViewModel()
         : base()
         {
@@ -444,23 +420,15 @@ namespace ReCap.Hub.ViewModels
             ;
         }
 
-        public void WriteToXml(ref XElement gameConfigEl)
-        {
-            gameConfigEl.RemoveNodes();
-
-            gameConfigEl.SetAttributeValue(HubData.WINE_PFX_ATTR, WinePrefixPath);
-            gameConfigEl.SetAttributeValue(HubData.WINE_EX_ATTR, WineExecPath);
-            gameConfigEl.SetAttributeValue(HubData.GAME_PATH_ATTR, GameInstallPath);
-            gameConfigEl.SetAttributeValue(HubData.SAVES_PATH_ATTR, SavesPath);
-            gameConfigEl.SetAttributeValue("displayName", Title);
-
-            var newSaves = Saves.OrderBy(x => x.LastLaunchTime);
-            foreach (var save in newSaves)
+        public ReCap.Hub.Domain.GameInstall ToGameInstall()
+            => new ReCap.Hub.Domain.GameInstall
             {
-                var saveEl = new XElement("save");
-                save.WriteToXml(ref saveEl);
-                gameConfigEl.Add(saveEl);
-            }
-        }
+                GameInstallPath = GameInstallPath,
+                SavesPath = SavesPath,
+                WinePrefix = WinePrefixPath,
+                WineExecutable = WineExecPath,
+                DisplayName = Title,
+                Saves = Saves.OrderBy(x => x.LastLaunchTime).Select(s => s.ToSaveRef()).ToList(),
+            };
     }
 }
