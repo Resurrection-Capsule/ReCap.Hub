@@ -7,6 +7,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 using ReCap.CommonUI;
 using ReCap.Hub.Data;
+using ReCap.Hub.Composition;
 
 namespace ReCap.Hub
 {
@@ -54,6 +55,8 @@ namespace ReCap.Hub
             }
             
             
+            HubServices.Build();
+
             if (CommandLine.Instance.ShowGUI)
             {
                 BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
