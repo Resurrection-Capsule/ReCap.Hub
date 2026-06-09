@@ -59,8 +59,43 @@ namespace ReCap.Hub.Services
 
         public void Save(HubConfig config)
         {
-            // Filled in a later task.
-            throw new NotImplementedException();
+            var doc = Serialize(config);
+
+            _fs.CreateDirectory(_cfgDir);
+
+            string tempPath = _cfgPath + ".tmp";
+            _fs.WriteAllText(tempPath, doc.ToString());   // whole-document write — no incremental Add
+            _fs.Move(tempPath, _cfgPath, overwrite: true); // atomic replace
+        }
+
+        XDocument Serialize(HubConfig config)
+        {
+            var gameConfigsEl = new XElement(GAME_CONFIGS_EL);
+            foreach (var install in config.GameInstalls)
+            {
+                var el = new XElement(GAME_CONFIG_EL);
+                el.SetAttributeValue(GAME_PATH_ATTR, install.GameInstallPath);
+                el.SetAttributeValue(SAVES_PATH_ATTR, install.SavesPath);
+                el.SetAttributeValue(WINE_PFX_ATTR, install.WinePrefix);     // null => attribute omitted
+                el.SetAttributeValue(WINE_EX_ATTR, install.WineExecutable);  // null => attribute omitted
+                el.SetAttributeValue(DISPLAY_NAME_ATTR, install.DisplayName);
+                foreach (var save in install.Saves)
+                {
+                    var saveEl = new XElement(SAVE_EL);
+                    saveEl.SetAttributeValue(SAVE_ID_ATTR, save.Id);
+                    saveEl.SetAttributeValue(SAVE_LLT_ATTR,
+                        save.LastLaunchTime.ToString(CultureInfo.InvariantCulture));
+                    el.Add(saveEl);
+                }
+                gameConfigsEl.Add(el);
+            }
+
+            var prefsEl = new XElement(USER_PREFS_EL,
+                new XElement(USER_DISPLAY_NAME_EL, config.UserDisplayName),
+                new XElement(USE_MANAGED_DECORATIONS_EL, config.UseManagedDecorations),
+                new XElement(AUTO_CLOSE_SERVER_EL, config.AutoCloseServer));
+
+            return new XDocument(new XElement(ROOT_EL, gameConfigsEl, prefsEl));
         }
 
         HubConfig Parse(XDocument doc)
