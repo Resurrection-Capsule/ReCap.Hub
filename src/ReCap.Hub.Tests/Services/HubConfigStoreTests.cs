@@ -158,5 +158,19 @@ namespace ReCap.Hub.Tests.Services
 
             Assert.Equal(good, fs.Files[CfgPath]); // target unchanged
         }
+
+        [Fact]
+        public void Load_CorruptXml_BacksUpAndReturnsDefaults()
+        {
+            var fs = new FakeFileSystem();
+            fs.Files[CfgPath] = "<hub><gameConfigs></hub>"; // malformed
+            var store = NewStore(fs);
+
+            var cfg = store.Load();
+
+            AssertConfigsEqual(HubConfig.Default, cfg);
+            Assert.True(fs.FileExists(CfgPath + ".corrupt.bak"));
+            Assert.Equal("<hub><gameConfigs></hub>", fs.Files[CfgPath + ".corrupt.bak"]);
+        }
     }
 }

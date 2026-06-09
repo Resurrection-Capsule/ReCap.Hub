@@ -157,7 +157,14 @@ namespace ReCap.Hub.Services
 
         void BackUpCorruptFile()
         {
-            // Filled in a later task.
+            try
+            {
+                _fs.WriteAllText(_cfgPath + ".corrupt.bak", _fs.ReadAllText(_cfgPath));
+            }
+            catch
+            {
+                // Backup is best-effort; never let it block recovery to defaults.
+            }
         }
     }
 }
