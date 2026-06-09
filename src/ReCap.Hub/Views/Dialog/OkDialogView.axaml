@@ -1,0 +1,24 @@
+<UserControl x:Class="ReCap.Hub.Views.OkDialogView"
+            xmlns="https://github.com/avaloniaui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:vm="using:ReCap.Hub.ViewModels"
+            Theme="{DynamicResource DialogRoot}"
+            Width="400">
+    <DockPanel>
+        <ContentControl Theme="{DynamicResource DialogFooter}"
+                        HorizontalContentAlignment="Stretch"
+                        DockPanel.Dock="Bottom">
+            <DockPanel LastChildFill="False">
+                <Button Command="{Binding OkCommand}"
+                        Classes="right"
+                        DockPanel.Dock="Right">OK</Button>
+            </DockPanel>
+        </ContentControl>
+        <HeaderedContentControl Header="{Binding Title, Mode=OneWay}"
+                                Theme="{DynamicResource DialogBody}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Content, Mode=OneWay}" VerticalAlignment="Center"/>
+            </StackPanel>
+        </HeaderedContentControl>
+    </DockPanel>
+</UserControl>
