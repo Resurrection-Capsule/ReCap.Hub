@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="../ReCap.Hub/ReCap.Hub.csproj" />
+  </ItemGroup>
+
 </Project>
